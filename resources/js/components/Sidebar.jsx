@@ -54,7 +54,8 @@ export default function Sidebar({ collapsed }) {
 
                 <SidebarItem
                     label="Dashboard"
-                    active
+                    to="/dashboard"
+                    active={window.location.pathname === '/dashboard'}
                     collapsed={collapsed}
                     icon={
                         <svg
@@ -77,6 +78,8 @@ export default function Sidebar({ collapsed }) {
 
                 <SidebarItem
                     label="Trainee Intake"
+                    to="/trainee-intake"
+                    active={window.location.pathname === '/trainee-intake'}
                     collapsed={collapsed}
                     icon={
                         <svg
@@ -98,6 +101,8 @@ export default function Sidebar({ collapsed }) {
 
                 <SidebarItem
                     label="Profiles & Records"
+                    to="/profiles-records"
+                    active={window.location.pathname === '/profiles-records'}
                     collapsed={collapsed}
                     icon={
                         <svg
@@ -126,6 +131,8 @@ export default function Sidebar({ collapsed }) {
 
                 <SidebarItem
                     label="Announcements"
+                    to="/announcements"
+                    active={window.location.pathname === '/announcements'}
                     badge="5"
                     collapsed={collapsed}
                     icon={
@@ -148,6 +155,8 @@ export default function Sidebar({ collapsed }) {
 
                 <SidebarItem
                     label="Schedule Coordination"
+                    to="/schedule-coordination"
+                    active={window.location.pathname === '/schedule-coordination'}
                     collapsed={collapsed}
                     icon={
                         <svg
@@ -169,6 +178,8 @@ export default function Sidebar({ collapsed }) {
 
                 <SidebarItem
                     label="Report Readiness"
+                    to="/report-readiness"
+                    active={window.location.pathname === '/report-readiness'}
                     collapsed={collapsed}
                     icon={
                         <svg
@@ -197,6 +208,8 @@ export default function Sidebar({ collapsed }) {
 
                 <SidebarItem
                     label="Settings"
+                    to="/settings"
+                    active={window.location.pathname === '/settings'}
                     collapsed={collapsed}
                     icon={
                         <svg
