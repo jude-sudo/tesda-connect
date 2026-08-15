@@ -462,643 +462,124 @@ export default function TraineeIntake() {
     };
 
 
-    return (
+return (
 
-        <>
+    <>
+
+        {/* =====================================================
+            PAGE
+        ====================================================== */}
+
+        <div
+            className="
+                min-h-screen
+                bg-[#eef3f9]
+                dark:bg-slate-950
+            "
+        >
+
 
             {/* =====================================================
-                PAGE
+                HEADER
             ====================================================== */}
 
-            <div className="min-h-screen bg-[#eef3f9]">
+            <div
+                className="
+                    mb-6
+                    flex
+                    items-center
+                    justify-between
+                "
+            >
 
+                <div>
 
-                {/* ONLINE BAR */}
+                    <div className="flex items-center gap-2">
 
-              
+                        <span className="text-2xl">
+                            📋
+                        </span>
 
-
-                {/* HEADER */}
-
-                <div
-                    className="
-                        mb-6
-                        flex
-                        items-center
-                        justify-between
-                    "
-                >
-
-                    <div>
-
-                        <div className="flex items-center gap-2">
-
-                            <span className="text-2xl">
-                                📋
-                            </span>
-
-                            <h1
-                                className="
-                                    text-3xl
-                                    font-bold
-                                    text-[#12284a]
-                                "
-                            >
-                                Trainee Intake
-                            </h1>
-
-                        </div>
-
-                        <p
+                        <h1
                             className="
-                                mt-1
-                                text-base
-                                text-[#66809f]
-                            "
-                        >
-                            Manage and process new trainee registrations
-                        </p>
-
-                    </div>
-
-
-                    <div className="flex gap-3">
-
-                        {/* IMPORT */}
-
-                        <button
-                            type="button"
-                            className="
-                                rounded-xl
-                                border
-                                border-slate-200
-                                bg-white
-                                px-5
-                                py-3
-                                text-sm
-                                font-semibold
-                                text-[#16345f]
-                                shadow-sm
-                                transition
-                                hover:shadow-md
-                            "
-                            onClick={() =>
-                                alert('CSV import will be connected next.')
-                            }
-                        >
-                            📥 Import CSV
-                        </button>
-
-
-                        {/* ADD */}
-
-                        <button
-                            type="button"
-                            onClick={openAddModal}
-                            className="
-                                rounded-xl
-                                bg-[#10285d]
-                                px-5
-                                py-3
-                                text-sm
+                                text-3xl
                                 font-bold
-                                text-white
-                                shadow-md
-                                transition
-                                hover:bg-[#173778]
+                                text-[#12284a]
+                                dark:text-white
                             "
                         >
-                            ＋ Add New Trainee
-                        </button>
+                            Trainee Intake
+                        </h1>
 
                     </div>
+
+                    <p
+                        className="
+                            mt-1
+                            text-base
+                            text-[#66809f]
+                            dark:text-slate-400
+                        "
+                    >
+                        Manage and process new trainee registrations
+                    </p>
 
                 </div>
 
 
-                {/* =====================================================
-                    TABLE CARD
-                ====================================================== */}
+                <div className="flex gap-3">
 
-                <div
-                    className="
-                        overflow-hidden
-                        rounded-xl
-                        border
-                        border-slate-200
-                        bg-white
-                        shadow-sm
-                    "
-                >
+                    {/* IMPORT */}
 
-
-                    {/* SEARCH */}
-
-                    <div
+                    <button
+                        type="button"
                         className="
-                            flex
-                            items-center
-                            gap-3
-                            border-b
+                            rounded-xl
+                            border
                             border-slate-200
-                            p-4
-                        "
-                    >
-
-                        <div className="relative flex-1">
-
-                            <span
-                                className="
-                                    absolute
-                                    left-4
-                                    top-1/2
-                                    -translate-y-1/2
-                                "
-                            >
-                                🔍
-                            </span>
-
-                            <input
-                                type="text"
-                                value={search}
-                                onChange={(e) => {
-                                    setSearch(e.target.value);
-                                    setCurrentPage(1);
-                                }}
-                                placeholder="Search by name, ID, or contact..."
-                                className="
-                                    w-full
-                                    rounded-lg
-                                    border
-                                    border-slate-200
-                                    bg-[#f8fafc]
-                                    py-2.5
-                                    pl-11
-                                    pr-4
-                                    text-sm
-                                    outline-none
-                                    transition
-                                    focus:border-[#10285d]
-                                    focus:ring-2
-                                    focus:ring-[#10285d]/10
-                                "
-                            />
-
-                        </div>
-
-
-                        {/* BATCH */}
-
-                        <select
-                            value={batchFilter}
-                            onChange={(e) => {
-                                setBatchFilter(e.target.value);
-                                setCurrentPage(1);
-                            }}
-                            className="
-                                rounded-lg
-                                border
-                                border-slate-200
-                                bg-white
-                                px-4
-                                py-2.5
-                                text-sm
-                                text-[#16345f]
-                                outline-none
-                            "
-                        >
-
-                            <option>All Batches</option>
-                            <option>Batch 1</option>
-                            <option>Batch 2</option>
-                            <option>Batch 3</option>
-                            <option>Batch 4</option>
-                            <option>Batch 5</option>
-
-                        </select>
-
-
-                        {/* STATUS */}
-
-                        <select
-                            value={statusFilter}
-                            onChange={(e) => {
-                                setStatusFilter(e.target.value);
-                                setCurrentPage(1);
-                            }}
-                            className="
-                                rounded-lg
-                                border
-                                border-slate-200
-                                bg-white
-                                px-4
-                                py-2.5
-                                text-sm
-                                text-[#16345f]
-                                outline-none
-                            "
-                        >
-
-                            <option>All Statuses</option>
-                            <option>Verified</option>
-                            <option>Incomplete</option>
-                            <option>Draft</option>
-                            <option>Submitted</option>
-
-                        </select>
-
-
-                        <span className="whitespace-nowrap text-sm text-[#66809f]">
-
-                            Showing {paginatedTrainees.length} of{' '}
-                            {filteredTrainees.length} trainees
-
-                        </span>
-
-                    </div>
-
-
-                    {/* TABLE */}
-
-                    <div className="overflow-x-auto">
-
-                        <table className="w-full">
-
-                            <thead>
-
-                                <tr
-                                    className="
-                                        border-b
-                                        border-slate-200
-                                        bg-[#f8fafc]
-                                        text-left
-                                        text-xs
-                                        font-semibold
-                                        uppercase
-                                        tracking-wide
-                                        text-[#58708f]
-                                    "
-                                >
-
-                                    <th className="w-12 px-4 py-3">
-                                        <input
-                                            type="checkbox"
-                                            className="rounded"
-                                        />
-                                    </th>
-
-                                    <th className="px-4 py-3">
-                                        Trainee ID
-                                    </th>
-
-                                    <th className="px-4 py-3">
-                                        Full Name
-                                    </th>
-
-                                    <th className="px-4 py-3">
-                                        Batch
-                                    </th>
-
-                                    <th className="px-4 py-3">
-                                        Course
-                                    </th>
-
-                                    <th className="px-4 py-3">
-                                        Contact No.
-                                    </th>
-
-                                    <th className="px-4 py-3">
-                                        Status
-                                    </th>
-
-                                    <th className="px-4 py-3 text-center">
-                                        Actions
-                                    </th>
-
-                                </tr>
-
-                            </thead>
-
-
-                            <tbody>
-
-                                {paginatedTrainees.map((trainee) => (
-
-                                    <tr
-                                        key={trainee.id}
-                                        className="
-                                            border-b
-                                            border-slate-100
-                                            transition
-                                            hover:bg-slate-50
-                                        "
-                                    >
-
-                                        <td className="px-4 py-4">
-
-                                            <input
-                                                type="checkbox"
-                                                className="rounded"
-                                            />
-
-                                        </td>
-
-
-                                        <td
-                                            className="
-                                                px-4
-                                                py-4
-                                                text-sm
-                                                font-medium
-                                                text-[#456a96]
-                                            "
-                                        >
-                                            {trainee.traineeId}
-                                        </td>
-
-
-                                        <td
-                                            className="
-                                                px-4
-                                                py-4
-                                                text-sm
-                                                font-semibold
-                                                text-[#12284a]
-                                            "
-                                        >
-
-                                            {trainee.firstName}{' '}
-
-                                            {trainee.middleName
-                                                ? `${trainee.middleName} `
-                                                : ''
-                                            }
-
-                                            {trainee.lastName}
-
-                                        </td>
-
-
-                                        <td className="px-4 py-4 text-sm text-[#16345f]">
-                                            {trainee.batch}
-                                        </td>
-
-
-                                        <td
-                                            className="
-                                                max-w-[180px]
-                                                truncate
-                                                px-4
-                                                py-4
-                                                text-sm
-                                                text-[#16345f]
-                                            "
-                                        >
-                                            {trainee.course}
-                                        </td>
-
-
-                                        <td className="px-4 py-4 text-sm text-[#16345f]">
-                                            {trainee.contact}
-                                        </td>
-
-
-                                        <td className="px-4 py-4">
-                                            {statusBadge(trainee.status)}
-                                        </td>
-
-
-                                        {/* ACTIONS */}
-
-                                        <td
-                                            className="
-                                                px-4
-                                                py-4
-                                            "
-                                        >
-
-                                            <div
-                                                className="
-                                                    flex
-                                                    items-center
-                                                    justify-center
-                                                    gap-3
-                                                "
-                                            >
-
-                                                {/* VIEW */}
-
-                                                <button
-                                                    type="button"
-                                                    title="View"
-                                                    className="
-                                                        text-slate-500
-                                                        transition
-                                                        hover:text-[#10285d]
-                                                    "
-                                                    onClick={() =>
-                                                        alert(
-                                                            `Viewing ${trainee.firstName} ${trainee.lastName}`
-                                                        )
-                                                    }
-                                                >
-                                                    👁
-                                                </button>
-
-
-                                                {/* EDIT */}
-
-                                                <button
-                                                    type="button"
-                                                    title="Edit"
-                                                    className="
-                                                        text-orange-500
-                                                        transition
-                                                        hover:text-orange-700
-                                                    "
-                                                    onClick={() =>
-                                                        editTrainee(trainee)
-                                                    }
-                                                >
-                                                    ✏️
-                                                </button>
-
-
-                                                {/* DELETE */}
-
-                                                <button
-                                                    type="button"
-                                                    title="Delete"
-                                                    className="
-                                                        text-slate-400
-                                                        transition
-                                                        hover:text-red-500
-                                                    "
-                                                    onClick={() =>
-                                                        deleteTrainee(trainee.id)
-                                                    }
-                                                >
-                                                    🗑
-                                                </button>
-
-                                            </div>
-
-                                        </td>
-
-                                    </tr>
-
-                                ))}
-
-
-                                {/* EMPTY */}
-
-                                {paginatedTrainees.length === 0 && (
-
-                                    <tr>
-
-                                        <td
-                                            colSpan="8"
-                                            className="
-                                                px-6
-                                                py-16
-                                                text-center
-                                                text-slate-400
-                                            "
-                                        >
-
-                                            <div className="text-4xl">
-                                                📋
-                                            </div>
-
-                                            <p className="mt-3 font-semibold">
-                                                No trainees found
-                                            </p>
-
-                                            <p className="mt-1 text-sm">
-                                                Try changing your search or filters.
-                                            </p>
-
-                                        </td>
-
-                                    </tr>
-
-                                )}
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
-
-                    {/* PAGINATION */}
-
-                    <div
-                        className="
-                            flex
-                            items-center
-                            justify-between
-                            border-t
-                            border-slate-200
-                            px-4
+                            bg-white
+                            px-5
                             py-3
+                            text-sm
+                            font-semibold
+                            text-[#16345f]
+                            shadow-sm
+                            transition
+                            hover:shadow-md
+
+                            dark:border-slate-700
+                            dark:bg-slate-900
+                            dark:text-slate-200
+                            dark:hover:bg-slate-800
+                        "
+                        onClick={() =>
+                            alert('CSV import will be connected next.')
+                        }
+                    >
+                        📥 Import CSV
+                    </button>
+
+
+                    {/* ADD */}
+
+                    <button
+                        type="button"
+                        onClick={openAddModal}
+                        className="
+                            rounded-xl
+                            bg-[#10285d]
+                            px-5
+                            py-3
+                            text-sm
+                            font-bold
+                            text-white
+                            shadow-md
+                            transition
+                            hover:bg-[#173778]
                         "
                     >
-
-                        <span className="text-sm text-[#66809f]">
-
-                            Page {currentPage} of {totalPages || 1}
-
-                        </span>
-
-
-                        <div className="flex items-center gap-2">
-
-                            <button
-                                type="button"
-                                disabled={currentPage === 1}
-                                onClick={() =>
-                                    setCurrentPage((page) =>
-                                        Math.max(page - 1, 1)
-                                    )
-                                }
-                                className="
-                                    rounded-lg
-                                    border
-                                    border-slate-200
-                                    px-3
-                                    py-2
-                                    text-sm
-                                    disabled:cursor-not-allowed
-                                    disabled:opacity-40
-                                    hover:bg-slate-50
-                                "
-                            >
-                                ‹
-                            </button>
-
-
-                            {Array.from(
-                                { length: totalPages || 1 },
-                                (_, index) => index + 1
-                            ).map((page) => (
-
-                                <button
-                                    key={page}
-                                    type="button"
-                                    onClick={() =>
-                                        setCurrentPage(page)
-                                    }
-                                    className={`
-                                        rounded-lg
-                                        px-3
-                                        py-2
-                                        text-sm
-                                        font-semibold
-                                        ${currentPage === page
-                                            ? 'bg-[#10285d] text-white'
-                                            : 'border border-slate-200 text-[#16345f] hover:bg-slate-50'
-                                        }
-                                    `}
-                                >
-                                    {page}
-                                </button>
-
-                            ))}
-
-
-                            <button
-                                type="button"
-                                disabled={
-                                    currentPage === totalPages ||
-                                    totalPages === 0
-                                }
-                                onClick={() =>
-                                    setCurrentPage((page) =>
-                                        Math.min(
-                                            page + 1,
-                                            totalPages
-                                        )
-                                    )
-                                }
-                                className="
-                                    rounded-lg
-                                    border
-                                    border-slate-200
-                                    px-3
-                                    py-2
-                                    text-sm
-                                    disabled:cursor-not-allowed
-                                    disabled:opacity-40
-                                    hover:bg-slate-50
-                                "
-                            >
-                                ›
-                            </button>
-
-                        </div>
-
-                    </div>
+                        ＋ Add New Trainee
+                    </button>
 
                 </div>
 
@@ -1106,484 +587,1185 @@ export default function TraineeIntake() {
 
 
             {/* =====================================================
-                ADD / EDIT TRAINEE DRAWER
+                TABLE CARD
             ====================================================== */}
 
-            {showModal && (
+            <div
+                className="
+                    overflow-hidden
+                    rounded-xl
+                    border
+                    border-slate-200
+                    bg-white
+                    shadow-sm
 
-                <div className="fixed inset-0 z-[100]">
+                    dark:border-slate-700
+                    dark:bg-slate-900
+                "
+            >
 
-                    {/* BACKDROP */}
 
-                    <div
+                {/* SEARCH / FILTER BAR */}
+
+                <div
+                    className="
+                        flex
+                        items-center
+                        gap-3
+                        border-b
+                        border-slate-200
+                        p-4
+
+                        dark:border-slate-700
+                    "
+                >
+
+                    <div className="relative flex-1">
+
+                        <span
+                            className="
+                                absolute
+                                left-4
+                                top-1/2
+                                -translate-y-1/2
+                            "
+                        >
+                            🔍
+                        </span>
+
+                        <input
+                            type="text"
+                            value={search}
+                            onChange={(e) => {
+                                setSearch(e.target.value);
+                                setCurrentPage(1);
+                            }}
+                            placeholder="Search by name, ID, or contact..."
+                            className="
+                                w-full
+                                rounded-lg
+                                border
+                                border-slate-200
+                                bg-[#f8fafc]
+                                py-2.5
+                                pl-11
+                                pr-4
+                                text-sm
+                                text-[#16345f]
+                                outline-none
+                                transition
+                                placeholder:text-slate-400
+                                focus:border-[#10285d]
+                                focus:ring-2
+                                focus:ring-[#10285d]/10
+
+                                dark:border-slate-700
+                                dark:bg-slate-800
+                                dark:text-white
+                                dark:placeholder:text-slate-500
+                                dark:focus:border-blue-500
+                                dark:focus:ring-blue-500/20
+                            "
+                        />
+
+                    </div>
+
+
+                    {/* BATCH */}
+
+                    <select
+                        value={batchFilter}
+                        onChange={(e) => {
+                            setBatchFilter(e.target.value);
+                            setCurrentPage(1);
+                        }}
                         className="
-                            absolute
-                            inset-0
-                            bg-slate-900/50
-                            backdrop-blur-[2px]
-                        "
-                        onClick={closeModal}
-                    />
-
-
-                    {/* DRAWER */}
-
-                    <div
-                        className="
-                            absolute
-                            right-0
-                            top-0
-                            flex
-                            h-full
-                            w-full
-                            max-w-[560px]
-                            flex-col
+                            rounded-lg
+                            border
+                            border-slate-200
                             bg-white
-                            shadow-2xl
+                            px-4
+                            py-2.5
+                            text-sm
+                            text-[#16345f]
+                            outline-none
+
+                            dark:border-slate-700
+                            dark:bg-slate-800
+                            dark:text-white
                         "
                     >
 
+                        <option>All Batches</option>
+                        <option>Batch 1</option>
+                        <option>Batch 2</option>
+                        <option>Batch 3</option>
+                        <option>Batch 4</option>
+                        <option>Batch 5</option>
 
-                        {/* DRAWER HEADER */}
-
-                        <div
-                            className="
-                                flex
-                                items-center
-                                justify-between
-                                bg-[#10285d]
-                                px-6
-                                py-5
-                                text-white
-                            "
-                        >
-
-                            <div className="flex items-center gap-3">
-
-                                <span className="text-xl">
-                                    📋
-                                </span>
-
-                                <h2 className="text-lg font-bold">
-
-                                    {editingId
-                                        ? 'Edit Trainee'
-                                        : 'Add New Trainee'
-                                    }
-
-                                </h2>
-
-                            </div>
+                    </select>
 
 
-                            <button
-                                type="button"
-                                onClick={closeModal}
+                    {/* STATUS */}
+
+                    <select
+                        value={statusFilter}
+                        onChange={(e) => {
+                            setStatusFilter(e.target.value);
+                            setCurrentPage(1);
+                        }}
+                        className="
+                            rounded-lg
+                            border
+                            border-slate-200
+                            bg-white
+                            px-4
+                            py-2.5
+                            text-sm
+                            text-[#16345f]
+                            outline-none
+
+                            dark:border-slate-700
+                            dark:bg-slate-800
+                            dark:text-white
+                        "
+                    >
+
+                        <option>All Statuses</option>
+                        <option>Verified</option>
+                        <option>Incomplete</option>
+                        <option>Draft</option>
+                        <option>Submitted</option>
+
+                    </select>
+
+
+                    <span
+                        className="
+                            whitespace-nowrap
+                            text-sm
+                            text-[#66809f]
+                            dark:text-slate-400
+                        "
+                    >
+
+                        Showing {paginatedTrainees.length} of{' '}
+                        {filteredTrainees.length} trainees
+
+                    </span>
+
+                </div>
+
+
+                {/* =====================================================
+                    TABLE
+                ====================================================== */}
+
+                <div className="overflow-x-auto">
+
+                    <table className="w-full">
+
+                        <thead>
+
+                            <tr
                                 className="
-                                    text-xl
-                                    text-white/80
-                                    transition
-                                    hover:text-white
+                                    border-b
+                                    border-slate-200
+                                    bg-[#f8fafc]
+                                    text-left
+                                    text-xs
+                                    font-semibold
+                                    uppercase
+                                    tracking-wide
+                                    text-[#58708f]
+
+                                    dark:border-slate-700
+                                    dark:bg-slate-800
+                                    dark:text-slate-300
                                 "
                             >
-                                ✕
-                            </button>
 
-                        </div>
-
-
-                        {/* FORM */}
-
-                        <div
-                            className="
-                                flex-1
-                                overflow-y-auto
-                                px-6
-                                py-5
-                            "
-                        >
-
-
-                            {/* ======================================
-                                SECTION 1
-                            ======================================= */}
-
-                            <FormSection
-                                number="1"
-                                title="PERSONAL INFORMATION"
-                            >
-
-                                <div className="grid grid-cols-2 gap-4">
-
-                                    <Input
-                                        label="First Name"
-                                        name="firstName"
-                                        value={form.firstName}
-                                        onChange={handleChange}
-                                        required
-                                        placeholder="Juan"
+                                <th className="w-12 px-4 py-3">
+                                    <input
+                                        type="checkbox"
+                                        className="rounded"
                                     />
+                                </th>
 
-                                    <Input
-                                        label="Middle Name"
-                                        name="middleName"
-                                        value={form.middleName}
-                                        onChange={handleChange}
-                                        placeholder="A."
-                                    />
+                                <th className="px-4 py-3">
+                                    Trainee ID
+                                </th>
 
-                                    <Input
-                                        label="Last Name"
-                                        name="lastName"
-                                        value={form.lastName}
-                                        onChange={handleChange}
-                                        required
-                                        placeholder="Dela Cruz"
-                                    />
+                                <th className="px-4 py-3">
+                                    Full Name
+                                </th>
 
-                                    <Input
-                                        label="Date of Birth"
-                                        name="birthDate"
-                                        type="date"
-                                        value={form.birthDate}
-                                        onChange={handleChange}
-                                        required
-                                    />
+                                <th className="px-4 py-3">
+                                    Batch
+                                </th>
 
-                                </div>
+                                <th className="px-4 py-3">
+                                    Course
+                                </th>
+
+                                <th className="px-4 py-3">
+                                    Contact No.
+                                </th>
+
+                                <th className="px-4 py-3">
+                                    Status
+                                </th>
+
+                                <th className="px-4 py-3 text-center">
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
 
 
-                                {/* GENDER */}
+                        <tbody>
 
-                                <div className="mt-4">
+                            {paginatedTrainees.map((trainee) => (
 
-                                    <label className="form-label">
-                                        Gender <Required />
-                                    </label>
+                                <tr
+                                    key={trainee.id}
+                                    className="
+                                        border-b
+                                        border-slate-100
+                                        transition
+                                        hover:bg-slate-50
 
-                                    <div className="flex gap-6">
+                                        dark:border-slate-800
+                                        dark:hover:bg-slate-800/70
+                                    "
+                                >
 
-                                        <label className="flex items-center gap-2 text-sm text-slate-600">
+                                    <td className="px-4 py-4">
 
-                                            <input
-                                                type="radio"
-                                                name="gender"
-                                                value="Male"
-                                                checked={
-                                                    form.gender === 'Male'
+                                        <input
+                                            type="checkbox"
+                                            className="rounded"
+                                        />
+
+                                    </td>
+
+
+                                    {/* TRAINEE ID */}
+
+                                    <td
+                                        className="
+                                            px-4
+                                            py-4
+                                            text-sm
+                                            font-medium
+                                            text-[#456a96]
+
+                                            dark:text-blue-400
+                                        "
+                                    >
+                                        {trainee.traineeId}
+                                    </td>
+
+
+                                    {/* NAME */}
+
+                                    <td
+                                        className="
+                                            px-4
+                                            py-4
+                                            text-sm
+                                            font-semibold
+                                            text-[#12284a]
+
+                                            dark:text-white
+                                        "
+                                    >
+
+                                        {trainee.firstName}{' '}
+
+                                        {trainee.middleName
+                                            ? `${trainee.middleName} `
+                                            : ''
+                                        }
+
+                                        {trainee.lastName}
+
+                                    </td>
+
+
+                                    {/* BATCH */}
+
+                                    <td
+                                        className="
+                                            px-4
+                                            py-4
+                                            text-sm
+                                            text-[#16345f]
+
+                                            dark:text-slate-300
+                                        "
+                                    >
+                                        {trainee.batch}
+                                    </td>
+
+
+                                    {/* COURSE */}
+
+                                    <td
+                                        className="
+                                            max-w-[180px]
+                                            truncate
+                                            px-4
+                                            py-4
+                                            text-sm
+                                            text-[#16345f]
+
+                                            dark:text-slate-300
+                                        "
+                                    >
+                                        {trainee.course}
+                                    </td>
+
+
+                                    {/* CONTACT */}
+
+                                    <td
+                                        className="
+                                            px-4
+                                            py-4
+                                            text-sm
+                                            text-[#16345f]
+
+                                            dark:text-slate-300
+                                        "
+                                    >
+                                        {trainee.contact}
+                                    </td>
+
+
+                                    {/* STATUS */}
+
+                                    <td className="px-4 py-4">
+                                        {statusBadge(trainee.status)}
+                                    </td>
+
+
+                                    {/* ACTIONS */}
+
+                                    <td className="px-4 py-4">
+
+                                        <div
+                                            className="
+                                                flex
+                                                items-center
+                                                justify-center
+                                                gap-3
+                                            "
+                                        >
+
+                                            {/* VIEW */}
+
+                                            <button
+                                                type="button"
+                                                title="View"
+                                                className="
+                                                    text-slate-500
+                                                    transition
+                                                    hover:text-[#10285d]
+
+                                                    dark:text-slate-400
+                                                    dark:hover:text-blue-400
+                                                "
+                                                onClick={() =>
+                                                    alert(
+                                                        `Viewing ${trainee.firstName} ${trainee.lastName}`
+                                                    )
                                                 }
-                                                onChange={handleChange}
-                                            />
-
-                                            Male
-
-                                        </label>
+                                            >
+                                                👁
+                                            </button>
 
 
-                                        <label className="flex items-center gap-2 text-sm text-slate-600">
+                                            {/* EDIT */}
 
-                                            <input
-                                                type="radio"
-                                                name="gender"
-                                                value="Female"
-                                                checked={
-                                                    form.gender === 'Female'
+                                            <button
+                                                type="button"
+                                                title="Edit"
+                                                className="
+                                                    text-orange-500
+                                                    transition
+                                                    hover:text-orange-700
+                                                "
+                                                onClick={() =>
+                                                    editTrainee(trainee)
                                                 }
-                                                onChange={handleChange}
-                                            />
-
-                                            Female
-
-                                        </label>
-
-                                    </div>
-
-                                </div>
+                                            >
+                                                ✏️
+                                            </button>
 
 
-                                <div className="mt-4 grid grid-cols-2 gap-4">
+                                            {/* DELETE */}
 
-                                    <Select
-                                        label="Civil Status"
-                                        name="civilStatus"
-                                        value={form.civilStatus}
-                                        onChange={handleChange}
-                                        options={[
-                                            'Single',
-                                            'Married',
-                                            'Widowed',
-                                            'Separated',
-                                        ]}
-                                    />
+                                            <button
+                                                type="button"
+                                                title="Delete"
+                                                className="
+                                                    text-slate-400
+                                                    transition
+                                                    hover:text-red-500
 
-                                    <Input
-                                        label="Contact Number"
-                                        name="contact"
-                                        value={form.contact}
-                                        onChange={handleChange}
-                                        required
-                                        placeholder="09XXXXXXXXX"
-                                    />
+                                                    dark:text-slate-500
+                                                    dark:hover:text-red-400
+                                                "
+                                                onClick={() =>
+                                                    deleteTrainee(trainee.id)
+                                                }
+                                            >
+                                                🗑
+                                            </button>
 
-                                </div>
+                                        </div>
 
+                                    </td>
 
-                                <div className="mt-4">
+                                </tr>
 
-                                    <Input
-                                        label="Email Address"
-                                        name="email"
-                                        type="email"
-                                        value={form.email}
-                                        onChange={handleChange}
-                                        placeholder="email@example.com"
-                                    />
-
-                                </div>
+                            ))}
 
 
-                                <div className="mt-4">
+                            {/* EMPTY */}
 
-                                    <Input
-                                        label="Complete Address"
-                                        name="address"
-                                        value={form.address}
-                                        onChange={handleChange}
-                                        required
-                                        placeholder="Purok, Street, Barangay..."
-                                    />
+                            {paginatedTrainees.length === 0 && (
 
-                                </div>
+                                <tr>
 
+                                    <td
+                                        colSpan="8"
+                                        className="
+                                            px-6
+                                            py-16
+                                            text-center
+                                            text-slate-400
 
-                                <div className="mt-4 grid grid-cols-2 gap-4">
+                                            dark:text-slate-500
+                                        "
+                                    >
 
-                                    <Input
-                                        label="Barangay"
-                                        name="barangay"
-                                        value={form.barangay}
-                                        onChange={handleChange}
-                                        required
-                                        placeholder="Tangkalan"
-                                    />
+                                        <div className="text-4xl">
+                                            📋
+                                        </div>
 
-                                    <Input
-                                        label="Municipality"
-                                        name="municipality"
-                                        value={form.municipality}
-                                        onChange={handleChange}
-                                        required
-                                        placeholder="Mamburao"
-                                    />
+                                        <p
+                                            className="
+                                                mt-3
+                                                font-semibold
+                                                text-slate-600
+                                                dark:text-slate-300
+                                            "
+                                        >
+                                            No trainees found
+                                        </p>
 
-                                </div>
+                                        <p
+                                            className="
+                                                mt-1
+                                                text-sm
+                                                text-slate-400
+                                                dark:text-slate-500
+                                            "
+                                        >
+                                            Try changing your search or filters.
+                                        </p>
 
+                                    </td>
 
-                                <div className="mt-4">
+                                </tr>
 
-                                    <Input
-                                        label="Province"
-                                        name="province"
-                                        value={form.province}
-                                        onChange={handleChange}
-                                        required
-                                        placeholder="Occidental Mindoro"
-                                    />
+                            )}
 
-                                </div>
+                        </tbody>
 
-                            </FormSection>
+                    </table>
 
-
-                            {/* ======================================
-                                SECTION 2
-                            ======================================= */}
-
-                            <FormSection
-                                number="2"
-                                title="TRAINING DETAILS"
-                            >
-
-                                <Input
-                                    label="TESDA Registration No."
-                                    name="tesdaRegistration"
-                                    value={form.tesdaRegistration}
-                                    onChange={handleChange}
-                                    placeholder="TESDA-2024-XXXX"
-                                />
+                </div>
 
 
-                                <div className="mt-4 grid grid-cols-2 gap-4">
+                {/* =====================================================
+                    PAGINATION
+                ====================================================== */}
 
-                                    <Select
-                                        label="Batch Assignment"
-                                        name="batch"
-                                        value={form.batch}
-                                        onChange={handleChange}
-                                        required
-                                        options={[
-                                            'Batch 1',
-                                            'Batch 2',
-                                            'Batch 3',
-                                            'Batch 4',
-                                            'Batch 5',
-                                        ]}
-                                        placeholder="— Select Batch —"
-                                    />
+                <div
+                    className="
+                        flex
+                        items-center
+                        justify-between
+                        border-t
+                        border-slate-200
+                        px-4
+                        py-3
 
+                        dark:border-slate-700
+                    "
+                >
 
-                                    <Select
-                                        label="Course / Qualification"
-                                        name="course"
-                                        value={form.course}
-                                        onChange={handleChange}
-                                        required
-                                        options={[
-                                            'Electrical Installation',
-                                            'Cookery NC II',
-                                            'Welding NC II',
-                                            'Housekeeping NC II',
-                                            'Plumbing NC II',
-                                        ]}
-                                        placeholder="— Select Course —"
-                                    />
+                    <span
+                        className="
+                            text-sm
+                            text-[#66809f]
+                            dark:text-slate-400
+                        "
+                    >
 
-                                </div>
+                        Page {currentPage} of {totalPages || 1}
+
+                    </span>
 
 
-                                <div className="mt-4 grid grid-cols-2 gap-4">
+                    <div className="flex items-center gap-2">
 
-                                    <Input
-                                        label="Training Start Date"
-                                        name="trainingStartDate"
-                                        type="date"
-                                        value={form.trainingStartDate}
-                                        onChange={handleChange}
-                                    />
+                        {/* PREVIOUS */}
 
-                                    <Input
-                                        label="Training End Date"
-                                        name="trainingEndDate"
-                                        type="date"
-                                        value={form.trainingEndDate}
-                                        onChange={handleChange}
-                                    />
-
-                                </div>
-
-
-                                <div className="mt-4">
-
-                                    <Select
-                                        label="Trainer Assigned"
-                                        name="trainer"
-                                        value={form.trainer}
-                                        onChange={handleChange}
-                                        options={[
-                                            'Instructor Reyes',
-                                            'Instructor Santos',
-                                            'Instructor Cruz',
-                                            'Instructor Garcia',
-                                        ]}
-                                        placeholder="— Select Trainer —"
-                                    />
-
-                                </div>
-
-                            </FormSection>
-
-                        </div>
-
-
-                        {/* FOOTER */}
-
-                        <div
+                        <button
+                            type="button"
+                            disabled={currentPage === 1}
+                            onClick={() =>
+                                setCurrentPage((page) =>
+                                    Math.max(page - 1, 1)
+                                )
+                            }
                             className="
-                                flex
-                                items-center
-                                justify-end
-                                gap-3
-                                border-t
+                                rounded-lg
+                                border
                                 border-slate-200
-                                bg-white
-                                px-6
-                                py-4
+                                px-3
+                                py-2
+                                text-sm
+                                text-[#16345f]
+                                disabled:cursor-not-allowed
+                                disabled:opacity-40
+                                hover:bg-slate-50
+
+                                dark:border-slate-700
+                                dark:text-slate-300
+                                dark:hover:bg-slate-800
                             "
                         >
+                            ‹
+                        </button>
+
+
+                        {/* PAGE NUMBERS */}
+
+                        {Array.from(
+                            { length: totalPages || 1 },
+                            (_, index) => index + 1
+                        ).map((page) => (
 
                             <button
-                                type="button"
-                                onClick={closeModal}
-                                className="
-                                    rounded-lg
-                                    border
-                                    border-slate-200
-                                    bg-white
-                                    px-5
-                                    py-2.5
-                                    text-sm
-                                    font-semibold
-                                    text-slate-600
-                                    hover:bg-slate-50
-                                "
-                            >
-                                Cancel
-                            </button>
-
-
-                            <button
+                                key={page}
                                 type="button"
                                 onClick={() =>
-                                    saveTrainee('Draft')
+                                    setCurrentPage(page)
                                 }
-                                className="
+                                className={`
                                     rounded-lg
-                                    border
-                                    border-slate-200
-                                    bg-white
-                                    px-5
-                                    py-2.5
+                                    px-3
+                                    py-2
                                     text-sm
                                     font-semibold
-                                    text-[#16345f]
-                                    shadow-sm
-                                    hover:bg-slate-50
-                                "
+
+                                    ${currentPage === page
+                                        ? 'bg-[#10285d] text-white'
+                                        : `
+                                            border
+                                            border-slate-200
+                                            text-[#16345f]
+                                            hover:bg-slate-50
+
+                                            dark:border-slate-700
+                                            dark:text-slate-300
+                                            dark:hover:bg-slate-800
+                                        `
+                                    }
+                                `}
                             >
-                                💾 Save as Draft
+                                {page}
                             </button>
 
+                        ))}
 
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    saveTrainee('Submitted')
-                                }
-                                className="
-                                    rounded-lg
-                                    bg-[#10285d]
-                                    px-5
-                                    py-2.5
-                                    text-sm
-                                    font-bold
-                                    text-white
-                                    shadow-md
-                                    hover:bg-[#173778]
-                                "
-                            >
-                                📤 Submit for Review
-                            </button>
 
-                        </div>
+                        {/* NEXT */}
+
+                        <button
+                            type="button"
+                            disabled={
+                                currentPage === totalPages ||
+                                totalPages === 0
+                            }
+                            onClick={() =>
+                                setCurrentPage((page) =>
+                                    Math.min(
+                                        page + 1,
+                                        totalPages
+                                    )
+                                )
+                            }
+                            className="
+                                rounded-lg
+                                border
+                                border-slate-200
+                                px-3
+                                py-2
+                                text-sm
+                                text-[#16345f]
+                                disabled:cursor-not-allowed
+                                disabled:opacity-40
+                                hover:bg-slate-50
+
+                                dark:border-slate-700
+                                dark:text-slate-300
+                                dark:hover:bg-slate-800
+                            "
+                        >
+                            ›
+                        </button>
 
                     </div>
 
                 </div>
 
-            )}
+            </div>
 
-        </>
-    );
+        </div>
+
+
+        {/* =====================================================
+            ADD / EDIT TRAINEE DRAWER
+        ====================================================== */}
+
+        {showModal && (
+
+            <div className="fixed inset-0 z-[100]">
+
+                {/* BACKDROP */}
+
+                <div
+                    className="
+                        absolute
+                        inset-0
+                        bg-slate-900/50
+                        backdrop-blur-[2px]
+
+                        dark:bg-black/70
+                    "
+                    onClick={closeModal}
+                />
+
+
+                {/* DRAWER */}
+
+                <div
+                    className="
+                        absolute
+                        right-0
+                        top-0
+                        flex
+                        h-full
+                        w-full
+                        max-w-[560px]
+                        flex-col
+                        bg-white
+                        shadow-2xl
+
+                        dark:bg-slate-900
+                    "
+                >
+
+
+                    {/* DRAWER HEADER */}
+
+                    <div
+                        className="
+                            flex
+                            items-center
+                            justify-between
+                            bg-[#10285d]
+                            px-6
+                            py-5
+                            text-white
+                        "
+                    >
+
+                        <div className="flex items-center gap-3">
+
+                            <span className="text-xl">
+                                📋
+                            </span>
+
+                            <h2 className="text-lg font-bold">
+
+                                {editingId
+                                    ? 'Edit Trainee'
+                                    : 'Add New Trainee'
+                                }
+
+                            </h2>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            onClick={closeModal}
+                            className="
+                                text-xl
+                                text-white/80
+                                transition
+                                hover:text-white
+                            "
+                        >
+                            ✕
+                        </button>
+
+                    </div>
+
+
+                    {/* FORM */}
+
+                    <div
+                        className="
+                            flex-1
+                            overflow-y-auto
+                            px-6
+                            py-5
+
+                            dark:bg-slate-900
+                        "
+                    >
+
+
+                        {/* ======================================
+                            SECTION 1
+                        ======================================= */}
+
+                        <FormSection
+                            number="1"
+                            title="PERSONAL INFORMATION"
+                        >
+
+                            <div className="grid grid-cols-2 gap-4">
+
+                                <Input
+                                    label="First Name"
+                                    name="firstName"
+                                    value={form.firstName}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="Juan"
+                                />
+
+                                <Input
+                                    label="Middle Name"
+                                    name="middleName"
+                                    value={form.middleName}
+                                    onChange={handleChange}
+                                    placeholder="A."
+                                />
+
+                                <Input
+                                    label="Last Name"
+                                    name="lastName"
+                                    value={form.lastName}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="Dela Cruz"
+                                />
+
+                                <Input
+                                    label="Date of Birth"
+                                    name="birthDate"
+                                    type="date"
+                                    value={form.birthDate}
+                                    onChange={handleChange}
+                                    required
+                                />
+
+                            </div>
+
+
+                            {/* GENDER */}
+
+                            <div className="mt-4">
+
+                                <label
+                                    className="
+                                        form-label
+                                        text-slate-700
+                                        dark:text-slate-300
+                                    "
+                                >
+                                    Gender <Required />
+                                </label>
+
+                                <div className="flex gap-6">
+
+                                    <label
+                                        className="
+                                            flex
+                                            items-center
+                                            gap-2
+                                            text-sm
+                                            text-slate-600
+
+                                            dark:text-slate-300
+                                        "
+                                    >
+
+                                        <input
+                                            type="radio"
+                                            name="gender"
+                                            value="Male"
+                                            checked={
+                                                form.gender === 'Male'
+                                            }
+                                            onChange={handleChange}
+                                        />
+
+                                        Male
+
+                                    </label>
+
+
+                                    <label
+                                        className="
+                                            flex
+                                            items-center
+                                            gap-2
+                                            text-sm
+                                            text-slate-600
+
+                                            dark:text-slate-300
+                                        "
+                                    >
+
+                                        <input
+                                            type="radio"
+                                            name="gender"
+                                            value="Female"
+                                            checked={
+                                                form.gender === 'Female'
+                                            }
+                                            onChange={handleChange}
+                                        />
+
+                                        Female
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+
+                            <div className="mt-4 grid grid-cols-2 gap-4">
+
+                                <Select
+                                    label="Civil Status"
+                                    name="civilStatus"
+                                    value={form.civilStatus}
+                                    onChange={handleChange}
+                                    options={[
+                                        'Single',
+                                        'Married',
+                                        'Widowed',
+                                        'Separated',
+                                    ]}
+                                />
+
+                                <Input
+                                    label="Contact Number"
+                                    name="contact"
+                                    value={form.contact}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="09XXXXXXXXX"
+                                />
+
+                            </div>
+
+
+                            <div className="mt-4">
+
+                                <Input
+                                    label="Email Address"
+                                    name="email"
+                                    type="email"
+                                    value={form.email}
+                                    onChange={handleChange}
+                                    placeholder="email@example.com"
+                                />
+
+                            </div>
+
+
+                            <div className="mt-4">
+
+                                <Input
+                                    label="Complete Address"
+                                    name="address"
+                                    value={form.address}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="Purok, Street, Barangay..."
+                                />
+
+                            </div>
+
+
+                            <div className="mt-4 grid grid-cols-2 gap-4">
+
+                                <Input
+                                    label="Barangay"
+                                    name="barangay"
+                                    value={form.barangay}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="Tangkalan"
+                                />
+
+                                <Input
+                                    label="Municipality"
+                                    name="municipality"
+                                    value={form.municipality}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="Mamburao"
+                                />
+
+                            </div>
+
+
+                            <div className="mt-4">
+
+                                <Input
+                                    label="Province"
+                                    name="province"
+                                    value={form.province}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="Occidental Mindoro"
+                                />
+
+                            </div>
+
+                        </FormSection>
+
+
+                        {/* ======================================
+                            SECTION 2
+                        ======================================= */}
+
+                        <FormSection
+                            number="2"
+                            title="TRAINING DETAILS"
+                        >
+
+                            <Input
+                                label="TESDA Registration No."
+                                name="tesdaRegistration"
+                                value={form.tesdaRegistration}
+                                onChange={handleChange}
+                                placeholder="TESDA-2024-XXXX"
+                            />
+
+
+                            <div className="mt-4 grid grid-cols-2 gap-4">
+
+                                <Select
+                                    label="Batch Assignment"
+                                    name="batch"
+                                    value={form.batch}
+                                    onChange={handleChange}
+                                    required
+                                    options={[
+                                        'Batch 1',
+                                        'Batch 2',
+                                        'Batch 3',
+                                        'Batch 4',
+                                        'Batch 5',
+                                    ]}
+                                    placeholder="— Select Batch —"
+                                />
+
+
+                                <Select
+                                    label="Course / Qualification"
+                                    name="course"
+                                    value={form.course}
+                                    onChange={handleChange}
+                                    required
+                                    options={[
+                                        'Electrical Installation',
+                                        'Cookery NC II',
+                                        'Welding NC II',
+                                        'Housekeeping NC II',
+                                        'Plumbing NC II',
+                                    ]}
+                                    placeholder="— Select Course —"
+                                />
+
+                            </div>
+
+
+                            <div className="mt-4 grid grid-cols-2 gap-4">
+
+                                <Input
+                                    label="Training Start Date"
+                                    name="trainingStartDate"
+                                    type="date"
+                                    value={form.trainingStartDate}
+                                    onChange={handleChange}
+                                />
+
+                                <Input
+                                    label="Training End Date"
+                                    name="trainingEndDate"
+                                    type="date"
+                                    value={form.trainingEndDate}
+                                    onChange={handleChange}
+                                />
+
+                            </div>
+
+
+                            <div className="mt-4">
+
+                                <Select
+                                    label="Trainer Assigned"
+                                    name="trainer"
+                                    value={form.trainer}
+                                    onChange={handleChange}
+                                    options={[
+                                        'Instructor Reyes',
+                                        'Instructor Santos',
+                                        'Instructor Cruz',
+                                        'Instructor Garcia',
+                                    ]}
+                                    placeholder="— Select Trainer —"
+                                />
+
+                            </div>
+
+                        </FormSection>
+
+                    </div>
+
+
+                    {/* FOOTER */}
+
+                    <div
+                        className="
+                            flex
+                            items-center
+                            justify-end
+                            gap-3
+                            border-t
+                            border-slate-200
+                            bg-white
+                            px-6
+                            py-4
+
+                            dark:border-slate-700
+                            dark:bg-slate-900
+                        "
+                    >
+
+                        <button
+                            type="button"
+                            onClick={closeModal}
+                            className="
+                                rounded-lg
+                                border
+                                border-slate-200
+                                bg-white
+                                px-5
+                                py-2.5
+                                text-sm
+                                font-semibold
+                                text-slate-600
+                                hover:bg-slate-50
+
+                                dark:border-slate-700
+                                dark:bg-slate-800
+                                dark:text-slate-300
+                                dark:hover:bg-slate-700
+                            "
+                        >
+                            Cancel
+                        </button>
+
+
+                        <button
+                            type="button"
+                            onClick={() =>
+                                saveTrainee('Draft')
+                            }
+                            className="
+                                rounded-lg
+                                border
+                                border-slate-200
+                                bg-white
+                                px-5
+                                py-2.5
+                                text-sm
+                                font-semibold
+                                text-[#16345f]
+                                shadow-sm
+                                hover:bg-slate-50
+
+                                dark:border-slate-700
+                                dark:bg-slate-800
+                                dark:text-slate-200
+                                dark:hover:bg-slate-700
+                            "
+                        >
+                            💾 Save as Draft
+                        </button>
+
+
+                        <button
+                            type="button"
+                            onClick={() =>
+                                saveTrainee('Submitted')
+                            }
+                            className="
+                                rounded-lg
+                                bg-[#10285d]
+                                px-5
+                                py-2.5
+                                text-sm
+                                font-bold
+                                text-white
+                                shadow-md
+                                hover:bg-[#173778]
+                            "
+                        >
+                            📤 Submit for Review
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        )}
+
+    </>
+);
 }
 
 
@@ -1595,7 +1777,7 @@ export default function TraineeIntake() {
 
 function Required() {
     return (
-        <span className="text-red-500">
+        <span className="text-red-500 dark:text-red-400">
             *
         </span>
     );
@@ -1617,6 +1799,7 @@ function FormSection({ number, title, children }) {
                     border-b
                     border-slate-200
                     pb-3
+                    dark:border-slate-700
                 "
             >
 
@@ -1630,6 +1813,7 @@ function FormSection({ number, title, children }) {
                         font-bold
                         tracking-wide
                         text-[#17345f]
+                        dark:text-slate-200
                     "
                 >
                     SECTION {number} — {title}
@@ -1658,7 +1842,13 @@ function Input({
 
         <div>
 
-            <label className="form-label">
+            <label
+                className="
+                    form-label
+                    text-slate-700
+                    dark:text-slate-300
+                "
+            >
 
                 {label}{' '}
 
@@ -1682,11 +1872,21 @@ function Input({
                     py-2.5
                     text-sm
                     text-slate-700
+                    placeholder:text-slate-400
                     outline-none
                     transition
+
                     focus:border-[#10285d]
                     focus:ring-2
                     focus:ring-[#10285d]/10
+
+                    dark:border-slate-600
+                    dark:bg-slate-800
+                    dark:text-slate-200
+                    dark:placeholder:text-slate-500
+
+                    dark:focus:border-blue-400
+                    dark:focus:ring-blue-400/20
                 "
             />
 
@@ -1709,7 +1909,13 @@ function Select({
 
         <div>
 
-            <label className="form-label">
+            <label
+                className="
+                    form-label
+                    text-slate-700
+                    dark:text-slate-300
+                "
+            >
 
                 {label}{' '}
 
@@ -1733,14 +1939,30 @@ function Select({
                     text-slate-700
                     outline-none
                     transition
+
                     focus:border-[#10285d]
                     focus:ring-2
                     focus:ring-[#10285d]/10
+
+                    dark:border-slate-600
+                    dark:bg-slate-800
+                    dark:text-slate-200
+
+                    dark:focus:border-blue-400
+                    dark:focus:ring-blue-400/20
                 "
             >
 
                 {placeholder && (
-                    <option value="">
+                    <option
+                        value=""
+                        className="
+                            bg-white
+                            text-slate-700
+                            dark:bg-slate-800
+                            dark:text-slate-300
+                        "
+                    >
                         {placeholder}
                     </option>
                 )}
@@ -1750,6 +1972,12 @@ function Select({
                     <option
                         key={option}
                         value={option}
+                        className="
+                            bg-white
+                            text-slate-700
+                            dark:bg-slate-800
+                            dark:text-slate-200
+                        "
                     >
                         {option}
                     </option>

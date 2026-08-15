@@ -259,606 +259,916 @@ export default function ScheduleCoordination() {
     };
 
     return (
-        <div className="min-h-full">
+    <div className="min-h-full">
 
-            {/* HEADER */}
-            <div className="mb-7 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+        {/* HEADER */}
+        <div className="mb-7 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
 
-                <div>
+            <div>
 
-                    <h1 className="text-3xl font-bold text-[#12284a]">
-                        📅 Schedule Coordination
-                    </h1>
+                <h1 className="text-3xl font-bold text-[#12284a] dark:text-white">
+                    📅 Schedule Coordination
+                </h1>
 
-                    <p className="mt-1 text-base text-[#66809f]">
-                        Manage batch training schedules, assessments, and events
-                    </p>
+                <p className="mt-1 text-base text-[#66809f] dark:text-slate-400">
+                    Manage batch training schedules, assessments, and events
+                </p>
 
-                </div>
+            </div>
+
+            <button
+                onClick={openAddModal}
+                className="
+                    rounded-xl
+                    bg-[#10285d]
+                    px-5
+                    py-3
+                    text-sm
+                    font-bold
+                    text-white
+                    shadow-md
+                    transition
+                    hover:bg-[#173778]
+                "
+            >
+                ➕ Add Schedule
+            </button>
+
+        </div>
+
+
+        {/* VIEW BUTTONS */}
+        <div className="mb-6 flex items-center justify-between">
+
+            <div
+                className="
+                    flex
+                    rounded-xl
+                    border
+                    border-slate-200
+                    bg-white
+                    p-1
+                    shadow-sm
+                    dark:border-slate-700
+                    dark:bg-slate-900
+                "
+            >
 
                 <button
-                    onClick={openAddModal}
-                    className="rounded-xl bg-[#10285d] px-5 py-3 text-sm font-bold text-white shadow-md transition hover:bg-[#173778]"
+                    onClick={() => setView('list')}
+                    className={`rounded-lg px-5 py-2.5 text-sm font-bold ${
+                        view === 'list'
+                            ? 'bg-[#10285d] text-white'
+                            : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200'
+                    }`}
                 >
-                    ➕ Add Schedule
+                    ☰ List
+                </button>
+
+                <button
+                    onClick={() => setView('week')}
+                    className={`rounded-lg px-5 py-2.5 text-sm font-bold ${
+                        view === 'week'
+                            ? 'bg-[#10285d] text-white'
+                            : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200'
+                    }`}
+                >
+                    📆 Week
+                </button>
+
+                <button
+                    onClick={() => setView('month')}
+                    className={`rounded-lg px-5 py-2.5 text-sm font-bold ${
+                        view === 'month'
+                            ? 'bg-[#10285d] text-white'
+                            : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200'
+                    }`}
+                >
+                    📅 Month
                 </button>
 
             </div>
 
+        </div>
 
-            {/* VIEW BUTTONS */}
-            <div className="mb-6 flex items-center justify-between">
 
-                <div className="flex rounded-xl border border-slate-200 bg-white p-1 shadow-sm">
+        {/* LIST VIEW */}
+        {view === 'list' && (
 
-                    <button
-                        onClick={() => setView('list')}
-                        className={`rounded-lg px-5 py-2.5 text-sm font-bold ${
-                            view === 'list'
-                                ? 'bg-[#10285d] text-white'
-                                : 'text-slate-500 hover:bg-slate-50'
-                        }`}
-                    >
-                        ☰ List
-                    </button>
+            <div
+                className="
+                    overflow-hidden
+                    rounded-2xl
+                    border
+                    border-slate-200
+                    bg-white
+                    shadow-sm
+                    dark:border-slate-700
+                    dark:bg-slate-900
+                "
+            >
 
-                    <button
-                        onClick={() => setView('week')}
-                        className={`rounded-lg px-5 py-2.5 text-sm font-bold ${
-                            view === 'week'
-                                ? 'bg-[#10285d] text-white'
-                                : 'text-slate-500 hover:bg-slate-50'
-                        }`}
-                    >
-                        📆 Week
-                    </button>
+                <div className="overflow-x-auto">
 
-                    <button
-                        onClick={() => setView('month')}
-                        className={`rounded-lg px-5 py-2.5 text-sm font-bold ${
-                            view === 'month'
-                                ? 'bg-[#10285d] text-white'
-                                : 'text-slate-500 hover:bg-slate-50'
-                        }`}
-                    >
-                        📅 Month
-                    </button>
+                    <table className="w-full min-w-[1100px]">
+
+                        <thead
+                            className="
+                                border-b
+                                border-slate-200
+                                bg-slate-50
+                                dark:border-slate-700
+                                dark:bg-slate-800
+                            "
+                        >
+
+                            <tr
+                                className="
+                                    text-left
+                                    text-xs
+                                    font-bold
+                                    uppercase
+                                    tracking-wide
+                                    text-slate-500
+                                    dark:text-slate-400
+                                "
+                            >
+
+                                <th className="px-6 py-4">
+                                    Event
+                                </th>
+
+                                <th className="px-4 py-4">
+                                    Batch
+                                </th>
+
+                                <th className="px-4 py-4">
+                                    Date
+                                </th>
+
+                                <th className="px-4 py-4">
+                                    Time
+                                </th>
+
+                                <th className="px-4 py-4">
+                                    Venue
+                                </th>
+
+                                <th className="px-4 py-4">
+                                    Trainer
+                                </th>
+
+                                <th className="px-4 py-4">
+                                    Type
+                                </th>
+
+                                <th className="px-4 py-4">
+                                    Status
+                                </th>
+
+                                <th className="px-6 py-4 text-right">
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody
+                            className="
+                                divide-y
+                                divide-slate-100
+                                dark:divide-slate-700
+                            "
+                        >
+
+                            {schedules.map((schedule) => (
+
+                                <tr
+                                    key={schedule.id}
+                                    className="
+                                        transition
+                                        hover:bg-slate-50
+                                        dark:hover:bg-slate-800
+                                    "
+                                >
+
+                                    <td className="px-6 py-5">
+
+                                        <div className="font-bold text-[#12284a] dark:text-white">
+                                            {schedule.title}
+                                        </div>
+
+                                    </td>
+
+                                    <td className="px-4 py-5 text-sm font-semibold text-slate-600 dark:text-slate-300">
+                                        {schedule.batch}
+                                    </td>
+
+                                    <td className="px-4 py-5 text-sm text-slate-600 dark:text-slate-300">
+                                        {schedule.date}
+                                    </td>
+
+                                    <td className="px-4 py-5 text-sm font-semibold text-slate-600 dark:text-slate-300">
+                                        {schedule.time}
+                                    </td>
+
+                                    <td className="px-4 py-5 text-sm text-slate-600 dark:text-slate-300">
+                                        {schedule.venue}
+                                    </td>
+
+                                    <td className="px-4 py-5 text-sm text-slate-600 dark:text-slate-300">
+                                        {schedule.trainer}
+                                    </td>
+
+                                    <td className="px-4 py-5">
+                                        {typeBadge(schedule.type)}
+                                    </td>
+
+                                    <td className="px-4 py-5">
+                                        {statusBadge(schedule.status)}
+                                    </td>
+
+                                    <td className="px-6 py-5">
+
+                                        <div className="flex justify-end gap-2">
+
+                                            <button
+                                                onClick={() =>
+                                                    openEditModal(schedule)
+                                                }
+                                                className="
+                                                    rounded-lg
+                                                    border
+                                                    border-slate-200
+                                                    px-3
+                                                    py-2
+                                                    text-sm
+                                                    transition
+                                                    hover:bg-slate-100
+                                                    dark:border-slate-600
+                                                    dark:hover:bg-slate-800
+                                                "
+                                                title="Edit"
+                                            >
+                                                ✏️
+                                            </button>
+
+                                            <button
+                                                onClick={() =>
+                                                    handleDelete(schedule.id)
+                                                }
+                                                className="
+                                                    rounded-lg
+                                                    border
+                                                    border-red-100
+                                                    px-3
+                                                    py-2
+                                                    text-sm
+                                                    transition
+                                                    hover:bg-red-50
+                                                    dark:border-red-900/50
+                                                    dark:hover:bg-red-950/40
+                                                "
+                                                title="Delete"
+                                            >
+                                                🗑️
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            ))}
+
+                        </tbody>
+
+                    </table>
 
                 </div>
 
             </div>
 
+        )}
 
-            {/* LIST VIEW */}
-            {view === 'list' && (
 
-                <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        {/* WEEK VIEW */}
+        {view === 'week' && (
 
-                    <div className="overflow-x-auto">
+            <div
+                className="
+                    rounded-2xl
+                    border
+                    border-slate-200
+                    bg-white
+                    p-8
+                    shadow-sm
+                    dark:border-slate-700
+                    dark:bg-slate-900
+                "
+            >
 
-                        <table className="w-full min-w-[1100px]">
+                <div className="mb-6">
 
-                            <thead className="border-b border-slate-200 bg-slate-50">
+                    <h2 className="text-xl font-bold text-[#12284a] dark:text-white">
+                        Weekly Schedule
+                    </h2>
 
-                                <tr className="text-left text-xs font-bold uppercase tracking-wide text-slate-500">
-
-                                    <th className="px-6 py-4">
-                                        Event
-                                    </th>
-
-                                    <th className="px-4 py-4">
-                                        Batch
-                                    </th>
-
-                                    <th className="px-4 py-4">
-                                        Date
-                                    </th>
-
-                                    <th className="px-4 py-4">
-                                        Time
-                                    </th>
-
-                                    <th className="px-4 py-4">
-                                        Venue
-                                    </th>
-
-                                    <th className="px-4 py-4">
-                                        Trainer
-                                    </th>
-
-                                    <th className="px-4 py-4">
-                                        Type
-                                    </th>
-
-                                    <th className="px-4 py-4">
-                                        Status
-                                    </th>
-
-                                    <th className="px-6 py-4 text-right">
-                                        Actions
-                                    </th>
-
-                                </tr>
-
-                            </thead>
-
-                            <tbody className="divide-y divide-slate-100">
-
-                                {schedules.map((schedule) => (
-
-                                    <tr
-                                        key={schedule.id}
-                                        className="transition hover:bg-slate-50"
-                                    >
-
-                                        <td className="px-6 py-5">
-
-                                            <div className="font-bold text-[#12284a]">
-                                                {schedule.title}
-                                            </div>
-
-                                        </td>
-
-                                        <td className="px-4 py-5 text-sm font-semibold text-slate-600">
-                                            {schedule.batch}
-                                        </td>
-
-                                        <td className="px-4 py-5 text-sm text-slate-600">
-                                            {schedule.date}
-                                        </td>
-
-                                        <td className="px-4 py-5 text-sm font-semibold text-slate-600">
-                                            {schedule.time}
-                                        </td>
-
-                                        <td className="px-4 py-5 text-sm text-slate-600">
-                                            {schedule.venue}
-                                        </td>
-
-                                        <td className="px-4 py-5 text-sm text-slate-600">
-                                            {schedule.trainer}
-                                        </td>
-
-                                        <td className="px-4 py-5">
-                                            {typeBadge(schedule.type)}
-                                        </td>
-
-                                        <td className="px-4 py-5">
-                                            {statusBadge(schedule.status)}
-                                        </td>
-
-                                        <td className="px-6 py-5">
-
-                                            <div className="flex justify-end gap-2">
-
-                                                <button
-                                                    onClick={() => openEditModal(schedule)}
-                                                    className="rounded-lg border border-slate-200 px-3 py-2 text-sm transition hover:bg-slate-100"
-                                                    title="Edit"
-                                                >
-                                                    ✏️
-                                                </button>
-
-                                                <button
-                                                    onClick={() => handleDelete(schedule.id)}
-                                                    className="rounded-lg border border-red-100 px-3 py-2 text-sm transition hover:bg-red-50"
-                                                    title="Delete"
-                                                >
-                                                    🗑️
-                                                </button>
-
-                                            </div>
-
-                                        </td>
-
-                                    </tr>
-
-                                ))}
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
+                    <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                        Weekly calendar view will be displayed here.
+                    </p>
 
                 </div>
 
-            )}
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
 
+                    {[
+                        'Mon',
+                        'Tue',
+                        'Wed',
+                        'Thu',
+                        'Fri',
+                        'Sat',
+                        'Sun',
+                    ].map((day) => (
 
-            {/* WEEK VIEW */}
-            {view === 'week' && (
+                        <div
+                            key={day}
+                            className="
+                                min-h-[180px]
+                                rounded-xl
+                                border
+                                border-slate-200
+                                bg-slate-50
+                                p-3
+                                dark:border-slate-700
+                                dark:bg-slate-800
+                            "
+                        >
 
-                <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-
-                    <div className="mb-6">
-
-                        <h2 className="text-xl font-bold text-[#12284a]">
-                            Weekly Schedule
-                        </h2>
-
-                        <p className="mt-1 text-sm text-slate-500">
-                            Weekly calendar view will be displayed here.
-                        </p>
-
-                    </div>
-
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
-
-                        {[
-                            'Mon',
-                            'Tue',
-                            'Wed',
-                            'Thu',
-                            'Fri',
-                            'Sat',
-                            'Sun',
-                        ].map((day) => (
-
-                            <div
-                                key={day}
-                                className="min-h-[180px] rounded-xl border border-slate-200 bg-slate-50 p-3"
-                            >
-
-                                <div className="mb-3 text-sm font-bold text-[#12284a]">
-                                    {day}
-                                </div>
-
-                                <div className="space-y-2">
-
-                                    {schedules.slice(0, 2).map((schedule) => (
-
-                                        <div
-                                            key={`${day}-${schedule.id}`}
-                                            className="rounded-lg border border-slate-200 bg-white p-2 shadow-sm"
-                                        >
-
-                                            <div className="text-[11px] font-bold text-[#10285d]">
-                                                {schedule.time}
-                                            </div>
-
-                                            <div className="mt-1 text-xs font-semibold text-slate-700">
-                                                {schedule.title}
-                                            </div>
-
-                                        </div>
-
-                                    ))}
-
-                                </div>
-
-                            </div>
-
-                        ))}
-
-                    </div>
-
-                </div>
-
-            )}
-
-
-            {/* MONTH VIEW */}
-            {view === 'month' && (
-
-                <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-
-                    <div className="mb-6">
-
-                        <h2 className="text-xl font-bold text-[#12284a]">
-                            Monthly Schedule
-                        </h2>
-
-                        <p className="mt-1 text-sm text-slate-500">
-                            Monthly calendar view will be displayed here.
-                        </p>
-
-                    </div>
-
-                    <div className="grid grid-cols-7 overflow-hidden rounded-xl border border-slate-200">
-
-                        {[
-                            'Sun',
-                            'Mon',
-                            'Tue',
-                            'Wed',
-                            'Thu',
-                            'Fri',
-                            'Sat',
-                        ].map((day) => (
-
-                            <div
-                                key={day}
-                                className="border-b border-slate-200 bg-slate-50 p-3 text-center text-xs font-bold text-slate-500"
-                            >
+                            <div className="mb-3 text-sm font-bold text-[#12284a] dark:text-white">
                                 {day}
                             </div>
 
-                        ))}
+                            <div className="space-y-2">
 
-                        {Array.from({ length: 35 }).map((_, index) => (
+                                {schedules.slice(0, 2).map((schedule) => (
 
-                            <div
-                                key={index}
-                                className="min-h-[100px] border-b border-r border-slate-100 p-2"
-                            >
+                                    <div
+                                        key={`${day}-${schedule.id}`}
+                                        className="
+                                            rounded-lg
+                                            border
+                                            border-slate-200
+                                            bg-white
+                                            p-2
+                                            shadow-sm
+                                            dark:border-slate-600
+                                            dark:bg-slate-900
+                                        "
+                                    >
 
-                                <span className="text-xs font-semibold text-slate-400">
-                                    {index + 1 <= 31
-                                        ? index + 1
-                                        : ''}
-                                </span>
+                                        <div className="text-[11px] font-bold text-[#10285d] dark:text-blue-400">
+                                            {schedule.time}
+                                        </div>
 
-                                {schedules
-                                    .filter((schedule) =>
-                                        schedule.date.includes(
-                                            `${index + 1}`
-                                        )
-                                    )
-                                    .slice(0, 2)
-                                    .map((schedule) => (
-
-                                        <div
-                                            key={schedule.id}
-                                            className="mt-2 rounded-md bg-blue-50 p-1.5 text-[10px] font-semibold text-blue-700"
-                                        >
+                                        <div className="mt-1 text-xs font-semibold text-slate-700 dark:text-slate-200">
                                             {schedule.title}
                                         </div>
 
-                                    ))}
+                                    </div>
+
+                                ))}
 
                             </div>
-
-                        ))}
-
-                    </div>
-
-                </div>
-
-            )}
-
-
-            {/* ADD / EDIT MODAL */}
-            {showModal && (
-
-                <div
-                    className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm"
-                    onClick={closeModal}
-                >
-
-                    <div
-                        className="max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-
-                        {/* MODAL HEADER */}
-                        <div className="flex items-center justify-between border-b border-slate-200 px-7 py-5">
-
-                            <div>
-
-                                <h2 className="text-xl font-bold text-[#12284a]">
-                                    {editingId
-                                        ? '✏️ Edit Schedule'
-                                        : '📅 Add New Schedule'}
-                                </h2>
-
-                                <p className="mt-1 text-sm text-slate-500">
-                                    Create and manage training schedules and events.
-                                </p>
-
-                            </div>
-
-                            <button
-                                onClick={closeModal}
-                                className="flex h-9 w-9 items-center justify-center rounded-lg text-xl text-slate-400 hover:bg-slate-100 hover:text-slate-700"
-                            >
-                                ✕
-                            </button>
 
                         </div>
 
+                    ))}
 
-                        {/* FORM */}
-                        <form
-                            onSubmit={handleSubmit}
-                            className="p-7"
+                </div>
+
+            </div>
+
+        )}
+
+
+        {/* MONTH VIEW */}
+        {view === 'month' && (
+
+            <div
+                className="
+                    rounded-2xl
+                    border
+                    border-slate-200
+                    bg-white
+                    p-8
+                    shadow-sm
+                    dark:border-slate-700
+                    dark:bg-slate-900
+                "
+            >
+
+                <div className="mb-6">
+
+                    <h2 className="text-xl font-bold text-[#12284a] dark:text-white">
+                        Monthly Schedule
+                    </h2>
+
+                    <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                        Monthly calendar view will be displayed here.
+                    </p>
+
+                </div>
+
+                <div
+                    className="
+                        grid
+                        grid-cols-7
+                        overflow-hidden
+                        rounded-xl
+                        border
+                        border-slate-200
+                        dark:border-slate-700
+                    "
+                >
+
+                    {[
+                        'Sun',
+                        'Mon',
+                        'Tue',
+                        'Wed',
+                        'Thu',
+                        'Fri',
+                        'Sat',
+                    ].map((day) => (
+
+                        <div
+                            key={day}
+                            className="
+                                border-b
+                                border-slate-200
+                                bg-slate-50
+                                p-3
+                                text-center
+                                text-xs
+                                font-bold
+                                text-slate-500
+                                dark:border-slate-700
+                                dark:bg-slate-800
+                                dark:text-slate-400
+                            "
+                        >
+                            {day}
+                        </div>
+
+                    ))}
+
+                    {Array.from({ length: 35 }).map((_, index) => (
+
+                        <div
+                            key={index}
+                            className="
+                                min-h-[100px]
+                                border-b
+                                border-r
+                                border-slate-100
+                                p-2
+                                dark:border-slate-700
+                            "
                         >
 
-                            <div className="space-y-5">
+                            <span className="text-xs font-semibold text-slate-400 dark:text-slate-500">
+                                {index + 1 <= 31
+                                    ? index + 1
+                                    : ''}
+                            </span>
 
-                                {/* TITLE */}
+                            {schedules
+                                .filter((schedule) =>
+                                    schedule.date.includes(
+                                        `${index + 1}`
+                                    )
+                                )
+                                .slice(0, 2)
+                                .map((schedule) => (
+
+                                    <div
+                                        key={schedule.id}
+                                        className="
+                                            mt-2
+                                            rounded-md
+                                            bg-blue-50
+                                            p-1.5
+                                            text-[10px]
+                                            font-semibold
+                                            text-blue-700
+                                            dark:bg-blue-950/40
+                                            dark:text-blue-300
+                                        "
+                                    >
+                                        {schedule.title}
+                                    </div>
+
+                                ))}
+
+                        </div>
+
+                    ))}
+
+                </div>
+
+            </div>
+
+        )}
+
+
+        {/* ADD / EDIT MODAL */}
+        {showModal && (
+
+            <div
+                className="
+                    fixed
+                    inset-0
+                    z-[100]
+                    flex
+                    items-center
+                    justify-center
+                    bg-slate-950/60
+                    p-4
+                    backdrop-blur-sm
+                "
+                onClick={closeModal}
+            >
+
+                <div
+                    className="
+                        max-h-[92vh]
+                        w-full
+                        max-w-2xl
+                        overflow-y-auto
+                        rounded-2xl
+                        bg-white
+                        shadow-2xl
+                        dark:bg-slate-900
+                    "
+                    onClick={(e) => e.stopPropagation()}
+                >
+
+                    {/* MODAL HEADER */}
+                    <div
+                        className="
+                            flex
+                            items-center
+                            justify-between
+                            border-b
+                            border-slate-200
+                            px-7
+                            py-5
+                            dark:border-slate-700
+                        "
+                    >
+
+                        <div>
+
+                            <h2 className="text-xl font-bold text-[#12284a] dark:text-white">
+                                {editingId
+                                    ? '✏️ Edit Schedule'
+                                    : '📅 Add New Schedule'}
+                            </h2>
+
+                            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                                Create and manage training schedules and events.
+                            </p>
+
+                        </div>
+
+                        <button
+                            onClick={closeModal}
+                            className="
+                                flex
+                                h-9
+                                w-9
+                                items-center
+                                justify-center
+                                rounded-lg
+                                text-xl
+                                text-slate-400
+                                hover:bg-slate-100
+                                hover:text-slate-700
+                                dark:hover:bg-slate-800
+                                dark:hover:text-slate-200
+                            "
+                        >
+                            ✕
+                        </button>
+
+                    </div>
+
+
+                    {/* FORM */}
+                    <form
+                        onSubmit={handleSubmit}
+                        className="p-7"
+                    >
+
+                        <div className="space-y-5">
+
+                            {/* TITLE */}
+                            <div>
+
+                                <label
+                                    className="
+                                        mb-2
+                                        block
+                                        text-sm
+                                        font-bold
+                                        text-[#12284a]
+                                        dark:text-slate-200
+                                    "
+                                >
+                                    Event Title
+                                    <span className="text-red-500">
+                                        *
+                                    </span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="title"
+                                    value={form.title}
+                                    onChange={handleChange}
+                                    placeholder="e.g. Batch 3 Final Assessment"
+                                    className="
+                                        w-full
+                                        rounded-xl
+                                        border
+                                        border-slate-200
+                                        bg-white
+                                        px-4
+                                        py-3
+                                        text-sm
+                                        text-slate-700
+                                        outline-none
+                                        transition
+                                        placeholder:text-slate-400
+                                        focus:border-[#10285d]
+                                        focus:ring-2
+                                        focus:ring-[#10285d]/10
+                                        dark:border-slate-600
+                                        dark:bg-slate-800
+                                        dark:text-slate-200
+                                        dark:placeholder:text-slate-500
+                                    "
+                                    required
+                                />
+
+                            </div>
+
+
+                            {/* BATCH + TYPE */}
+                            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+
                                 <div>
 
-                                    <label className="mb-2 block text-sm font-bold text-[#12284a]">
-                                        Event Title <span className="text-red-500">*</span>
+                                    <label
+                                        className="
+                                            mb-2
+                                            block
+                                            text-sm
+                                            font-bold
+                                            text-[#12284a]
+                                            dark:text-slate-200
+                                        "
+                                    >
+                                        Batch
+                                        <span className="text-red-500">
+                                            *
+                                        </span>
+                                    </label>
+
+                                    <select
+                                        name="batch"
+                                        value={form.batch}
+                                        onChange={handleChange}
+                                        className="
+                                            w-full
+                                            rounded-xl
+                                            border
+                                            border-slate-200
+                                            bg-white
+                                            px-4
+                                            py-3
+                                            text-sm
+                                            text-slate-700
+                                            outline-none
+                                            focus:border-[#10285d]
+                                            dark:border-slate-600
+                                            dark:bg-slate-800
+                                            dark:text-slate-200
+                                        "
+                                        required
+                                    >
+
+                                        <option value="">
+                                            — Select Batch —
+                                        </option>
+
+                                        <option>Batch 1</option>
+                                        <option>Batch 2</option>
+                                        <option>Batch 3</option>
+                                        <option>Batch 4</option>
+                                        <option>Batch 5</option>
+                                        <option>Batch 6</option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <div>
+
+                                    <label
+                                        className="
+                                            mb-2
+                                            block
+                                            text-sm
+                                            font-bold
+                                            text-[#12284a]
+                                            dark:text-slate-200
+                                        "
+                                    >
+                                        Event Type
+                                    </label>
+
+                                    <select
+                                        name="type"
+                                        value={form.type}
+                                        onChange={handleChange}
+                                        className="
+                                            w-full
+                                            rounded-xl
+                                            border
+                                            border-slate-200
+                                            bg-white
+                                            px-4
+                                            py-3
+                                            text-sm
+                                            text-slate-700
+                                            outline-none
+                                            focus:border-[#10285d]
+                                            dark:border-slate-600
+                                            dark:bg-slate-800
+                                            dark:text-slate-200
+                                        "
+                                    >
+
+                                        <option>Training</option>
+                                        <option>Assessment</option>
+                                        <option>Orientation</option>
+                                        <option>Intake</option>
+                                        <option>Event</option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            {/* DATE + TIME + DURATION */}
+                            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+
+                                <div>
+
+                                    <label
+                                        className="
+                                            mb-2
+                                            block
+                                            text-sm
+                                            font-bold
+                                            text-[#12284a]
+                                            dark:text-slate-200
+                                        "
+                                    >
+                                        Date
+                                        <span className="text-red-500">
+                                            *
+                                        </span>
                                     </label>
 
                                     <input
-                                        type="text"
-                                        name="title"
-                                        value={form.title}
+                                        type="date"
+                                        name="date"
+                                        value={form.date}
                                         onChange={handleChange}
-                                        placeholder="e.g. Batch 3 Final Assessment"
-                                        className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-[#10285d] focus:ring-2 focus:ring-[#10285d]/10"
+                                        className="
+                                            w-full
+                                            rounded-xl
+                                            border
+                                            border-slate-200
+                                            bg-white
+                                            px-4
+                                            py-3
+                                            text-sm
+                                            text-slate-700
+                                            outline-none
+                                            focus:border-[#10285d]
+                                            dark:border-slate-600
+                                            dark:bg-slate-800
+                                            dark:text-slate-200
+                                        "
                                         required
                                     />
 
                                 </div>
 
 
-                                {/* BATCH + TYPE */}
-                                <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-
-                                    <div>
-
-                                        <label className="mb-2 block text-sm font-bold text-[#12284a]">
-                                            Batch <span className="text-red-500">*</span>
-                                        </label>
-
-                                        <select
-                                            name="batch"
-                                            value={form.batch}
-                                            onChange={handleChange}
-                                            className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#10285d]"
-                                            required
-                                        >
-
-                                            <option value="">
-                                                — Select Batch —
-                                            </option>
-
-                                            <option>Batch 1</option>
-                                            <option>Batch 2</option>
-                                            <option>Batch 3</option>
-                                            <option>Batch 4</option>
-                                            <option>Batch 5</option>
-                                            <option>Batch 6</option>
-
-                                        </select>
-
-                                    </div>
-
-
-                                    <div>
-
-                                        <label className="mb-2 block text-sm font-bold text-[#12284a]">
-                                            Event Type
-                                        </label>
-
-                                        <select
-                                            name="type"
-                                            value={form.type}
-                                            onChange={handleChange}
-                                            className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#10285d]"
-                                        >
-
-                                            <option>Training</option>
-                                            <option>Assessment</option>
-                                            <option>Orientation</option>
-                                            <option>Intake</option>
-                                            <option>Event</option>
-
-                                        </select>
-
-                                    </div>
-
-                                </div>
-
-
-                                {/* DATE + TIME + DURATION */}
-                                <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-
-                                    <div>
-
-                                        <label className="mb-2 block text-sm font-bold text-[#12284a]">
-                                            Date <span className="text-red-500">*</span>
-                                        </label>
-
-                                        <input
-                                            type="date"
-                                            name="date"
-                                            value={form.date}
-                                            onChange={handleChange}
-                                            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-[#10285d]"
-                                            required
-                                        />
-
-                                    </div>
-
-
-                                    <div>
-
-                                        <label className="mb-2 block text-sm font-bold text-[#12284a]">
-                                            Time <span className="text-red-500">*</span>
-                                        </label>
-
-                                        <input
-                                            type="time"
-                                            name="time"
-                                            value={form.time}
-                                            onChange={handleChange}
-                                            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-[#10285d]"
-                                            required
-                                        />
-
-                                    </div>
-
-
-                                    <div>
-
-                                        <label className="mb-2 block text-sm font-bold text-[#12284a]">
-                                            Duration
-                                        </label>
-
-                                        <input
-                                            type="text"
-                                            name="duration"
-                                            value={form.duration}
-                                            onChange={handleChange}
-                                            placeholder="e.g. 3 hours"
-                                            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-[#10285d]"
-                                        />
-
-                                    </div>
-
-                                </div>
-
-
-                                {/* VENUE + TRAINER */}
-                                <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-
-                                    <div>
-
-                                        <label className="mb-2 block text-sm font-bold text-[#12284a]">
-                                            Venue
-                                        </label>
-
-                                        <input
-                                            type="text"
-                                            name="venue"
-                                            value={form.venue}
-                                            onChange={handleChange}
-                                            placeholder="e.g. Training Hall A"
-                                            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-[#10285d]"
-                                        />
-
-                                    </div>
-
-
-                                    <div>
-
-                                        <label className="mb-2 block text-sm font-bold text-[#12284a]">
-                                            Assigned Trainer
-                                        </label>
-
-                                        <input
-                                            type="text"
-                                            name="trainer"
-                                            value={form.trainer}
-                                            onChange={handleChange}
-                                            placeholder="e.g. Instructor Reyes"
-                                            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-[#10285d]"
-                                        />
-
-                                    </div>
-
-                                </div>
-
-
-                                {/* DESCRIPTION */}
                                 <div>
 
-                                    <label className="mb-2 block text-sm font-bold text-[#12284a]">
-                                        Description / Notes
+                                    <label
+                                        className="
+                                            mb-2
+                                            block
+                                            text-sm
+                                            font-bold
+                                            text-[#12284a]
+                                            dark:text-slate-200
+                                        "
+                                    >
+                                        Time
+                                        <span className="text-red-500">
+                                            *
+                                        </span>
                                     </label>
 
-                                    <textarea
-                                        name="description"
-                                        value={form.description}
+                                    <input
+                                        type="time"
+                                        name="time"
+                                        value={form.time}
                                         onChange={handleChange}
-                                        rows="4"
-                                        placeholder="Enter additional details or notes..."
-                                        className="w-full resize-none rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-[#10285d]"
+                                        className="
+                                            w-full
+                                            rounded-xl
+                                            border
+                                            border-slate-200
+                                            bg-white
+                                            px-4
+                                            py-3
+                                            text-sm
+                                            text-slate-700
+                                            outline-none
+                                            focus:border-[#10285d]
+                                            dark:border-slate-600
+                                            dark:bg-slate-800
+                                            dark:text-slate-200
+                                        "
+                                        required
+                                    />
+
+                                </div>
+
+
+                                <div>
+
+                                    <label
+                                        className="
+                                            mb-2
+                                            block
+                                            text-sm
+                                            font-bold
+                                            text-[#12284a]
+                                            dark:text-slate-200
+                                        "
+                                    >
+                                        Duration
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        name="duration"
+                                        value={form.duration}
+                                        onChange={handleChange}
+                                        placeholder="e.g. 3 hours"
+                                        className="
+                                            w-full
+                                            rounded-xl
+                                            border
+                                            border-slate-200
+                                            bg-white
+                                            px-4
+                                            py-3
+                                            text-sm
+                                            text-slate-700
+                                            outline-none
+                                            focus:border-[#10285d]
+                                            dark:border-slate-600
+                                            dark:bg-slate-800
+                                            dark:text-slate-200
+                                            dark:placeholder:text-slate-500
+                                        "
                                     />
 
                                 </div>
@@ -866,34 +1176,212 @@ export default function ScheduleCoordination() {
                             </div>
 
 
-                            {/* ACTIONS */}
-                            <div className="mt-7 flex justify-end gap-3 border-t border-slate-200 pt-5">
+                            {/* VENUE + TRAINER */}
+                            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
 
-                                <button
-                                    type="button"
-                                    onClick={closeModal}
-                                    className="rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-600 transition hover:bg-slate-50"
-                                >
-                                    Cancel
-                                </button>
+                                <div>
 
-                                <button
-                                    type="submit"
-                                    className="rounded-xl bg-[#10285d] px-6 py-3 text-sm font-bold text-white shadow-md transition hover:bg-[#173778]"
-                                >
-                                    💾 {editingId ? 'Update Schedule' : 'Save Schedule'}
-                                </button>
+                                    <label
+                                        className="
+                                            mb-2
+                                            block
+                                            text-sm
+                                            font-bold
+                                            text-[#12284a]
+                                            dark:text-slate-200
+                                        "
+                                    >
+                                        Venue
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        name="venue"
+                                        value={form.venue}
+                                        onChange={handleChange}
+                                        placeholder="e.g. Training Hall A"
+                                        className="
+                                            w-full
+                                            rounded-xl
+                                            border
+                                            border-slate-200
+                                            bg-white
+                                            px-4
+                                            py-3
+                                            text-sm
+                                            text-slate-700
+                                            outline-none
+                                            focus:border-[#10285d]
+                                            dark:border-slate-600
+                                            dark:bg-slate-800
+                                            dark:text-slate-200
+                                            dark:placeholder:text-slate-500
+                                        "
+                                    />
+
+                                </div>
+
+
+                                <div>
+
+                                    <label
+                                        className="
+                                            mb-2
+                                            block
+                                            text-sm
+                                            font-bold
+                                            text-[#12284a]
+                                            dark:text-slate-200
+                                        "
+                                    >
+                                        Assigned Trainer
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        name="trainer"
+                                        value={form.trainer}
+                                        onChange={handleChange}
+                                        placeholder="e.g. Instructor Reyes"
+                                        className="
+                                            w-full
+                                            rounded-xl
+                                            border
+                                            border-slate-200
+                                            bg-white
+                                            px-4
+                                            py-3
+                                            text-sm
+                                            text-slate-700
+                                            outline-none
+                                            focus:border-[#10285d]
+                                            dark:border-slate-600
+                                            dark:bg-slate-800
+                                            dark:text-slate-200
+                                            dark:placeholder:text-slate-500
+                                        "
+                                    />
+
+                                </div>
 
                             </div>
 
-                        </form>
 
-                    </div>
+                            {/* DESCRIPTION */}
+                            <div>
+
+                                <label
+                                    className="
+                                        mb-2
+                                        block
+                                        text-sm
+                                        font-bold
+                                        text-[#12284a]
+                                        dark:text-slate-200
+                                    "
+                                >
+                                    Description / Notes
+                                </label>
+
+                                <textarea
+                                    name="description"
+                                    value={form.description}
+                                    onChange={handleChange}
+                                    rows="4"
+                                    placeholder="Enter additional details or notes..."
+                                    className="
+                                        w-full
+                                        resize-none
+                                        rounded-xl
+                                        border
+                                        border-slate-200
+                                        bg-white
+                                        px-4
+                                        py-3
+                                        text-sm
+                                        text-slate-700
+                                        outline-none
+                                        focus:border-[#10285d]
+                                        dark:border-slate-600
+                                        dark:bg-slate-800
+                                        dark:text-slate-200
+                                        dark:placeholder:text-slate-500
+                                    "
+                                />
+
+                            </div>
+
+                        </div>
+
+
+                        {/* ACTIONS */}
+                        <div
+                            className="
+                                mt-7
+                                flex
+                                justify-end
+                                gap-3
+                                border-t
+                                border-slate-200
+                                pt-5
+                                dark:border-slate-700
+                            "
+                        >
+
+                            <button
+                                type="button"
+                                onClick={closeModal}
+                                className="
+                                    rounded-xl
+                                    border
+                                    border-slate-200
+                                    bg-white
+                                    px-5
+                                    py-3
+                                    text-sm
+                                    font-bold
+                                    text-slate-600
+                                    transition
+                                    hover:bg-slate-50
+                                    dark:border-slate-600
+                                    dark:bg-slate-800
+                                    dark:text-slate-300
+                                    dark:hover:bg-slate-700
+                                "
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="submit"
+                                className="
+                                    rounded-xl
+                                    bg-[#10285d]
+                                    px-6
+                                    py-3
+                                    text-sm
+                                    font-bold
+                                    text-white
+                                    shadow-md
+                                    transition
+                                    hover:bg-[#173778]
+                                "
+                            >
+                                💾 {editingId
+                                    ? 'Update Schedule'
+                                    : 'Save Schedule'}
+                            </button>
+
+                        </div>
+
+                    </form>
 
                 </div>
 
-            )}
+            </div>
 
-        </div>
-    );
+        )}
+
+    </div>
+);
 }

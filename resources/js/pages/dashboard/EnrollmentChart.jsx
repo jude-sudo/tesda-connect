@@ -10,50 +10,122 @@ const batches = [
 export default function EnrollmentChart() {
 
     return (
-        <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="
+            rounded-xl
+            border
+            border-slate-200
+            bg-white
+            p-6
+            shadow-sm
+            transition-colors
+            dark:border-slate-700
+            dark:bg-slate-800
+        ">
 
-            <h2 className="mb-6 text-lg font-bold text-[#17345b]">
+            {/* TITLE */}
+            <h2 className="
+                mb-6
+                text-lg
+                font-bold
+                text-[#17345b]
+                dark:text-white
+            ">
                 📈 Trainee Enrollment per Batch
             </h2>
 
+
+            {/* CHART */}
             <div className="relative h-[280px]">
 
-                {/* Grid */}
+                {/* =========================
+                    GRID
+                ========================= */}
                 <div className="absolute inset-0 flex flex-col justify-between">
 
                     {[30, 25, 20, 15, 10, 5, 0].map((number) => (
+
                         <div
                             key={number}
                             className="flex items-center"
                         >
-                            <span className="w-8 text-xs text-[#8093ab]">
+
+                            {/* NUMBER */}
+                            <span className="
+                                w-8
+                                text-xs
+                                text-[#8093ab]
+                                dark:text-slate-400
+                            ">
                                 {number}
                             </span>
 
-                            <div className="h-px flex-1 bg-slate-100" />
+
+                            {/* GRID LINE */}
+                            <div className="
+                                h-px
+                                flex-1
+                                bg-slate-100
+                                dark:bg-slate-700
+                            " />
+
                         </div>
+
                     ))}
 
                 </div>
 
-                {/* Bars */}
-                <div className="absolute bottom-0 left-10 right-0 top-0 flex items-end justify-around">
+
+                {/* =========================
+                    BARS
+                ========================= */}
+                <div className="
+                    absolute
+                    bottom-0
+                    left-10
+                    right-0
+                    top-0
+                    flex
+                    items-end
+                    justify-around
+                ">
 
                     {batches.map((batch) => (
 
                         <div
                             key={batch.name}
-                            className="flex h-full flex-1 flex-col items-center justify-end px-3"
+                            className="
+                                flex
+                                h-full
+                                flex-1
+                                flex-col
+                                items-center
+                                justify-end
+                                px-3
+                            "
                         >
 
+                            {/* BAR */}
                             <div
-                                className={`w-full max-w-[75px] rounded-t-lg ${batch.color}`}
+                                className={`
+                                    w-full
+                                    max-w-[75px]
+                                    rounded-t-lg
+                                    ${batch.color}
+                                    shadow-sm
+                                `}
                                 style={{
                                     height: `${(batch.value / 30) * 100}%`,
                                 }}
                             />
 
-                            <div className="mt-3 text-xs text-[#647b98]">
+
+                            {/* BATCH LABEL */}
+                            <div className="
+                                mt-3
+                                text-xs
+                                text-[#647b98]
+                                dark:text-slate-400
+                            ">
                                 {batch.name}
                             </div>
 

@@ -8,7 +8,7 @@ export default function AppLayout({ children }) {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
     return (
-        <div className="min-h-screen bg-[#eef3f9]">
+        <div className="min-h-screen bg-[#eef3f9] transition-colors duration-300 dark:bg-slate-950">
 
             {/* =========================
                 SIDEBAR
@@ -21,7 +21,7 @@ export default function AppLayout({ children }) {
             {/* =========================
                 MAIN AREA
             ========================= */}
-            <div 
+            <div
                 className={`
                     flex
                     min-h-screen
@@ -50,46 +50,78 @@ export default function AppLayout({ children }) {
                 {/* =========================
                     PAGE CONTENT
                 ========================= */}
-                <main className="flex-1 pt-[74px] p-6">
-                      <div
-                    className="
-                        -mx-6
-                        mb-6
-                        flex
-                        h-[38px]
-                        items-center
-                        border-b
-                        border-emerald-100
-                        bg-[#e5f7f2]
-                        px-5
-                        text-sm
-                        font-medium
-                        text-emerald-700
-                    "
-                >
+                <main className="flex-1 bg-[#eef3f9] pt-[74px] p-6 transition-colors duration-300 dark:bg-slate-950">
 
-                    <span
+                    {/* =========================
+                        ONLINE STATUS BAR
+                    ========================= */}
+                    <div
                         className="
-                            mr-2
-                            h-3
-                            w-3
-                            rounded-full
-                            bg-emerald-400
-                            shadow-[0_0_8px_rgba(52,211,153,.6)]
+                            -mx-6
+                            mb-6
+                            flex
+                            h-[38px]
+                            items-center
+                            border-b
+                            border-emerald-100
+                            bg-[#e5f7f2]
+                            px-5
+                            text-sm
+                            font-medium
+                            text-emerald-700
+                            transition-colors
+                            duration-300
+                            dark:border-emerald-900
+                            dark:bg-emerald-950/40
+                            dark:text-emerald-400
                         "
-                    />
+                    >
 
-                    Online — All features available
+                        <span
+                            className="
+                                mr-2
+                                h-3
+                                w-3
+                                rounded-full
+                                bg-emerald-400
+                                shadow-[0_0_8px_rgba(52,211,153,.6)]
+                            "
+                        />
 
-                </div>
+                        Online — All features available
+
+                    </div>
+
+
+                    {/* =========================
+                        PAGE
+                    ========================= */}
                     {children}
+
                 </main>
 
 
                 {/* =========================
                     FOOTER
                 ========================= */}
-                <footer className="mt-auto border-t border-slate-200 bg-white px-7 py-4 text-center text-sm text-[#8295ad]">
+                <footer
+                    className="
+                        mt-auto
+                        border-t
+                        border-slate-200
+                        bg-white
+                        px-7
+                        py-4
+                        text-center
+                        text-sm
+                        text-[#8295ad]
+                        transition-colors
+                        duration-300
+                        dark:border-slate-800
+                        dark:bg-slate-900
+                        dark:text-slate-400
+                    "
+                >
 
                     Balli School of Technology &amp; Mamburao Integrated Farm
 

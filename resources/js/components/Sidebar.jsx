@@ -10,52 +10,137 @@ export default function Sidebar({ collapsed }) {
                 z-50
                 h-screen
                 overflow-hidden
+
                 bg-[#0d2559]
                 text-white
+
                 shadow-xl
+
                 transition-all
                 duration-300
+
+                dark:bg-[#081b43]
+
                 ${collapsed ? 'w-[80px]' : 'w-[300px]'}
             `}
         >
 
-            {/* LOGO */}
-            <div className="flex h-[74px] items-center border-b border-white/10 px-5">
+            {/* =====================================================
+                LOGO
+            ===================================================== */}
+
+            <div
+                className="
+                    flex
+                    h-[74px]
+                    items-center
+
+                    border-b
+                    border-white/10
+
+                    px-5
+
+                    dark:border-white/10
+                "
+            >
+
                 <div className="flex items-center gap-3">
 
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-xs font-bold text-[#0d2559]">
+                    {/* LOGO CIRCLE */}
+
+                    <div
+                        className="
+                            flex
+                            h-10
+                            w-10
+                            shrink-0
+                            items-center
+                            justify-center
+
+                            rounded-full
+
+                            bg-white
+
+                            text-xs
+                            font-bold
+                            text-[#0d2559]
+
+                            shadow-sm
+                        "
+                    >
                         AD
                     </div>
 
+
+                    {/* LOGO TEXT */}
+
                     {!collapsed && (
+
                         <div className="whitespace-nowrap">
+
                             <div className="text-lg font-bold">
-                                TESDA<span className="text-orange-400">Connect</span>
+
+                                TESDA
+                                <span className="text-orange-400">
+                                    Connect
+                                </span>
+
                             </div>
 
                             <div className="text-xs text-white/50">
                                 Mamburao Integrated Farm
                             </div>
+
                         </div>
+
                     )}
 
                 </div>
+
             </div>
 
 
-            {/* MENU */}
+            {/* =====================================================
+                MENU
+            ===================================================== */}
+
             <nav className="px-3 py-6">
 
+                {/* MAIN MENU */}
+
                 {!collapsed && (
-                    <div className="mb-3 px-3 text-xs font-bold uppercase tracking-widest text-white/30">
+
+                    <div
+                        className="
+                            mb-3
+                            px-3
+
+                            text-xs
+                            font-bold
+                            uppercase
+                            tracking-widest
+
+                            text-white/30
+
+                            dark:text-white/30
+                        "
+                    >
                         Main Menu
                     </div>
+
                 )}
+
+
+                {/* =================================================
+                    DASHBOARD
+                ================================================= */}
 
                 <SidebarItem
                     label="Dashboard"
                     to="/dashboard"
-                    active={window.location.pathname === '/dashboard'}
+                    active={
+                        window.location.pathname === '/dashboard'
+                    }
                     collapsed={collapsed}
                     icon={
                         <svg
@@ -76,10 +161,16 @@ export default function Sidebar({ collapsed }) {
                 />
 
 
+                {/* =================================================
+                    TRAINEE INTAKE
+                ================================================= */}
+
                 <SidebarItem
                     label="Trainee Intake"
                     to="/trainee-intake"
-                    active={window.location.pathname === '/trainee-intake'}
+                    active={
+                        window.location.pathname === '/trainee-intake'
+                    }
                     collapsed={collapsed}
                     icon={
                         <svg
@@ -99,10 +190,17 @@ export default function Sidebar({ collapsed }) {
                     }
                 />
 
+
+                {/* =================================================
+                    PROFILES & RECORDS
+                ================================================= */}
+
                 <SidebarItem
                     label="Profiles & Records"
                     to="/profiles-records"
-                    active={window.location.pathname === '/profiles-records'}
+                    active={
+                        window.location.pathname === '/profiles-records'
+                    }
                     collapsed={collapsed}
                     icon={
                         <svg
@@ -123,16 +221,44 @@ export default function Sidebar({ collapsed }) {
                 />
 
 
+                {/* =================================================
+                    OPERATIONS
+                ================================================= */}
+
                 {!collapsed && (
-                    <div className="mb-3 mt-7 px-3 text-xs font-bold uppercase tracking-widest text-white/30">
+
+                    <div
+                        className="
+                            mb-3
+                            mt-7
+                            px-3
+
+                            text-xs
+                            font-bold
+                            uppercase
+                            tracking-widest
+
+                            text-white/30
+
+                            dark:text-white/30
+                        "
+                    >
                         Operations
                     </div>
+
                 )}
+
+
+                {/* =================================================
+                    ANNOUNCEMENTS
+                ================================================= */}
 
                 <SidebarItem
                     label="Announcements"
                     to="/announcements"
-                    active={window.location.pathname === '/announcements'}
+                    active={
+                        window.location.pathname === '/announcements'
+                    }
                     badge="5"
                     collapsed={collapsed}
                     icon={
@@ -153,10 +279,18 @@ export default function Sidebar({ collapsed }) {
                     }
                 />
 
+
+                {/* =================================================
+                    SCHEDULE COORDINATION
+                ================================================= */}
+
                 <SidebarItem
                     label="Schedule Coordination"
                     to="/schedule-coordination"
-                    active={window.location.pathname === '/schedule-coordination'}
+                    active={
+                        window.location.pathname ===
+                        '/schedule-coordination'
+                    }
                     collapsed={collapsed}
                     icon={
                         <svg
@@ -176,10 +310,17 @@ export default function Sidebar({ collapsed }) {
                     }
                 />
 
+
+                {/* =================================================
+                    REPORT READINESS
+                ================================================= */}
+
                 <SidebarItem
                     label="Report Readiness"
                     to="/report-readiness"
-                    active={window.location.pathname === '/report-readiness'}
+                    active={
+                        window.location.pathname === '/report-readiness'
+                    }
                     collapsed={collapsed}
                     icon={
                         <svg
@@ -200,16 +341,44 @@ export default function Sidebar({ collapsed }) {
                 />
 
 
+                {/* =================================================
+                    SYSTEM
+                ================================================= */}
+
                 {!collapsed && (
-                    <div className="mb-3 mt-7 px-3 text-xs font-bold uppercase tracking-widest text-white/30">
+
+                    <div
+                        className="
+                            mb-3
+                            mt-7
+                            px-3
+
+                            text-xs
+                            font-bold
+                            uppercase
+                            tracking-widest
+
+                            text-white/30
+
+                            dark:text-white/30
+                        "
+                    >
                         System
                     </div>
+
                 )}
+
+
+                {/* =================================================
+                    SETTINGS
+                ================================================= */}
 
                 <SidebarItem
                     label="Settings"
                     to="/settings"
-                    active={window.location.pathname === '/settings'}
+                    active={
+                        window.location.pathname === '/settings'
+                    }
                     collapsed={collapsed}
                     icon={
                         <svg
@@ -220,16 +389,19 @@ export default function Sidebar({ collapsed }) {
                             stroke="currentColor"
                             strokeWidth="2"
                         >
+
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 d="M10.5 6h3l.6-2h-4.2l.6 2zM7.5 9l-1.7-1.7L4 8.9l1.7 1.7M6 14H3v-2h3m1.5 3L5 17.7l1.4 1.4 2.5-2.5M12 18v3m4.5-3l2.5 2.5 1.4-1.4-2.5-2.5M18 14h3v-2h-3m-1.5-3L19 8.5l-1.4-1.4-2.5 2.5"
                             />
+
                             <circle
                                 cx="12"
                                 cy="13"
                                 r="3"
                             />
+
                         </svg>
                     }
                 />
@@ -237,27 +409,82 @@ export default function Sidebar({ collapsed }) {
             </nav>
 
 
-            {/* USER */}
-            <div className="absolute bottom-0 left-0 w-full border-t border-white/10 p-4">
+            {/* =====================================================
+                USER
+            ===================================================== */}
+
+            <div
+                className="
+                    absolute
+                    bottom-0
+                    left-0
+                    w-full
+
+                    border-t
+                    border-white/10
+
+                    p-4
+
+                    dark:border-white/10
+                "
+            >
 
                 <div className="flex items-center gap-3">
 
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cyan-400 font-bold text-white">
+                    {/* USER AVATAR */}
+
+                    <div
+                        className="
+                            flex
+                            h-10
+                            w-10
+                            shrink-0
+                            items-center
+                            justify-center
+
+                            rounded-full
+
+                            bg-cyan-400
+
+                            font-bold
+                            text-white
+
+                            shadow-sm
+                        "
+                    >
                         AD
                     </div>
 
+
+                    {/* USER INFORMATION */}
+
                     {!collapsed && (
+
                         <div className="min-w-0">
 
-                            <div className="truncate text-sm font-bold">
+                            <div
+                                className="
+                                    truncate
+                                    text-sm
+                                    font-bold
+                                    text-white
+                                "
+                            >
                                 Administrator
                             </div>
 
-                            <div className="truncate text-xs text-white/50">
+                            <div
+                                className="
+                                    truncate
+                                    text-xs
+                                    text-white/50
+                                "
+                            >
                                 Administrator
                             </div>
 
                         </div>
+
                     )}
 
                 </div>
@@ -267,7 +494,3 @@ export default function Sidebar({ collapsed }) {
         </aside>
     );
 }
-
-
-
-    

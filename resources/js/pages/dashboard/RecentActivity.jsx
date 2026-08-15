@@ -46,19 +46,70 @@ const activities = [
 export default function RecentActivity() {
 
     return (
-        <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div
+            className="
+                rounded-xl
+                border
+                border-slate-200
+                bg-white
+                p-6
+                shadow-sm
+                transition-colors
+                dark:border-slate-700
+                dark:bg-slate-800
+            "
+        >
+
+            {/* =================================================
+                HEADER
+            ================================================= */}
 
             <div className="mb-4 flex items-center justify-between">
 
-                <h2 className="text-lg font-bold text-[#17345b]">
+                <h2
+                    className="
+                        text-lg
+                        font-bold
+                        text-[#17345b]
+                        dark:text-white
+                    "
+                >
                     🕘 Recent Activity
                 </h2>
 
-                <button className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-[#17345b] shadow-sm">
+
+                {/* VIEW ALL */}
+                <button
+                    type="button"
+                    className="
+                        rounded-lg
+                        border
+                        border-slate-200
+                        bg-white
+                        px-4
+                        py-2
+                        text-sm
+                        font-semibold
+                        text-[#17345b]
+                        shadow-sm
+                        transition
+                        hover:bg-slate-50
+
+                        dark:border-slate-600
+                        dark:bg-slate-700
+                        dark:text-white
+                        dark:hover:bg-slate-600
+                    "
+                >
                     View All
                 </button>
 
             </div>
+
+
+            {/* =================================================
+                ACTIVITIES
+            ================================================= */}
 
             <div>
 
@@ -66,20 +117,56 @@ export default function RecentActivity() {
 
                     <div
                         key={index}
-                        className="flex items-center gap-4 border-b border-slate-100 py-4 last:border-b-0"
+                        className="
+                            flex
+                            items-center
+                            gap-4
+                            border-b
+                            border-slate-100
+                            py-4
+                            last:border-b-0
+
+                            dark:border-slate-700
+                        "
                     >
 
-                        <div className={`w-6 text-xl ${activity.color}`}>
+                        {/* ICON */}
+                        <div
+                            className={`
+                                w-6
+                                text-xl
+                                ${activity.color}
+                            `}
+                        >
                             {activity.icon}
                         </div>
 
+
+                        {/* ACTIVITY DETAILS */}
                         <div>
 
-                            <div className="text-sm font-medium text-[#19355c]">
+                            <div
+                                className="
+                                    text-sm
+                                    font-medium
+                                    text-[#19355c]
+
+                                    dark:text-slate-200
+                                "
+                            >
                                 {activity.text}
                             </div>
 
-                            <div className="mt-1 text-xs text-[#8ba0b9]">
+
+                            <div
+                                className="
+                                    mt-1
+                                    text-xs
+                                    text-[#8ba0b9]
+
+                                    dark:text-slate-400
+                                "
+                            >
                                 {activity.time}
                             </div>
 
