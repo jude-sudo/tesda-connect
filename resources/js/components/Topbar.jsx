@@ -1,9 +1,17 @@
 import { useState } from 'react';
 
+
+
 export default function Topbar({
     collapsed,
     onToggle,
+    user,
 }) {
+    const currentPath = window.location.pathname;
+
+    const userInitial =
+        user?.name?.trim()?.charAt(0)?.toUpperCase() ?? '.';
+ 
     const [showLogoutModal, setShowLogoutModal] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -121,7 +129,12 @@ export default function Topbar({
 
                         <div className="flex items-center gap-2 text-sm">
 
-                            <span className="text-slate-400 dark:text-slate-500">
+                           <span
+                                onClick={() => {
+                                    window.location.href = '/';
+                                }}
+                                className="cursor-pointer text-slate-400 transition-colors hover:text-[#0d2559] dark:text-slate-500 dark:hover:text-white"
+                            >
                                 Home
                             </span>
 
@@ -272,7 +285,7 @@ export default function Topbar({
                                     text-white
                                 "
                             >
-                                AD
+                                {userInitial}
                             </div>
 
 
@@ -289,7 +302,7 @@ export default function Topbar({
                                         dark:text-white
                                     "
                                 >
-                                    Administrator
+                                    {user?.name ?? '...'}
                                 </div>
 
                                 <div
@@ -300,7 +313,7 @@ export default function Topbar({
                                         dark:text-slate-500
                                     "
                                 >
-                                    Administrator
+                                    {user?.role ?? '...'}
                                 </div>
 
                             </div>

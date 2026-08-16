@@ -21,31 +21,53 @@ class LoginController extends Controller
             'password' => $credentials['password'],
         ])) {
             return response()->json([
-                'message' => 'Invalid username or password.'
+                'message' => 'Invalid username or password.',
             ], 401);
         }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Regenerate Session
+        |--------------------------------------------------------------------------
+        */
 
         $request->session()->regenerate();
 
         $user = Auth::user();
 
-        // Siguraduhin na tugma ang role
+        /*
+        |--------------------------------------------------------------------------
+        | Check Role
+        |--------------------------------------------------------------------------
+        */
+
         if ($user->role !== $credentials['role']) {
+
             Auth::logout();
 
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
             return response()->json([
-                'message' => 'The selected account type does not match this account.'
+                'message' => 'The selected account type does not match this account.',
             ], 403);
         }
 
+        /*
+        |--------------------------------------------------------------------------
+        | Login Success
+        |--------------------------------------------------------------------------
+        */
+
         return response()->json([
             'message' => 'Login successful.',
+
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,
                 'username' => $user->username,
                 'role' => $user->role,
-            ]
+            ],
         ]);
     }
 
@@ -57,7 +79,7 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return response()->json([
-            'message' => 'Logged out successfully.'
+            'message' => 'Logged out successfully.',
         ]);
     }
 }

@@ -3,8 +3,7 @@ import { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import Topbar from '../components/Topbar';
 
-export default function AppLayout({ children }) {
-
+export default function AppLayout({ children, user }) {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
     return (
@@ -15,6 +14,7 @@ export default function AppLayout({ children }) {
             ========================= */}
             <Sidebar
                 collapsed={sidebarCollapsed}
+                user={user}
             />
 
 
@@ -41,6 +41,7 @@ export default function AppLayout({ children }) {
                 ========================= */}
                 <Topbar
                     collapsed={sidebarCollapsed}
+                    user={user}
                     onToggle={() =>
                         setSidebarCollapsed(!sidebarCollapsed)
                     }
