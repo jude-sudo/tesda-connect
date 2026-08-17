@@ -8,6 +8,12 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="manifest" href="/manifest.webmanifest">
+
+    <meta name="theme-color" content="#0d2559">
+
+    <link rel="icon" href="/pwa-192x192.png">
+
     <title>TESDA-Connect</title>
 
     {{-- =========================================

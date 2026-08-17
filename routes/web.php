@@ -298,6 +298,26 @@ Route::get('/', function () {
 })->name('home');
 
 
+
+
+
+
+Route::get('/manifest.webmanifest', function () {
+
+    $path = public_path('build/manifest.webmanifest');
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    return response()->file($path, [
+        'Content-Type' => 'application/manifest+json',
+        'Cache-Control' => 'no-cache',
+    ]);
+
+});
+
+
 /*
 |--------------------------------------------------------------------------
 | React SPA Catch-All
